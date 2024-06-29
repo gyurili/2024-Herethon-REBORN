@@ -31,10 +31,12 @@
 
     {% endif %}
 
+<br><br><br><br>
+
 <!--  내가 쓴 글 목록  -->
     <h1>내가 쓴 글</h1>
     {% if post_list %}
-        <div class="post_container" ></div>
+        <div class="post_container" >
         {% for post in post_list %}
             <p>작성자 - {{ post.author.nickname }}</p>
             {% if post.author.image %}
@@ -96,7 +98,7 @@
     {% else %}
         <h2>좋아요를 누른 글이 없습니다.</h2>
     {% endif %}
-    </div>
+</div>
 
 </body>
 </html>
