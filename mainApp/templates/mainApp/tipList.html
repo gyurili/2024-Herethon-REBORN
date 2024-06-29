@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공유 게시판</title>
+</head>
+<body>
+    <h3>공유 게시판</h3>
+    <a href="{% url 'mainApp:main' %}">뒤로가기</a>
+    <hr>
+
+    <!-- 정렬 기준 -->
+    <form method="get" id="sortForm">
+        <label for="sort">정렬 기준:</label>
+        <select name="sort" id="sort" onchange="document.getElementById('sortForm').submit()">
+            <option value="latest" {% if sort == 'latest' %}selected{% endif %}>최신순</option>
+            <option value="likes" {% if sort == 'likes' %}selected{% endif %}>하트가 많은 순서</option>
+        </select>
+    </form>
+    <hr><br>
+
+    <!-- 카테고리 2번 글 목록 -->
+    {% for post in posts %}
+        <p>작성자 - {{ post.author.nickname }}</p>
+        {% if post.author.image %}
+                <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
+        {% endif %}
+        <p>작성일 - {{ post.created_at }}</p>
+        <p>하트 수 - {{ post.like.count }}</p>
+        <p>댓글 수 - {{ post.comments.count }}</p>
+        {% if post.image %}
+            <img width="320" height="240" src="{{ post.image.url }}">
+        {% endif %}
+        <h2><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></h2>
+        <p>
+            {% if post.content|length > 40 %}
+                {{ post.content|slice:":40" }}...
+            {% else %}
+                {{ post.content }}
+            {% endif %}
+        </p>
+        <hr>
+    {% empty %}
+        작성된 글이 없습니다.
+    {% endfor %}
+</body>
+</html>
