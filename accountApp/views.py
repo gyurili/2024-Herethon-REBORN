@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from .decorators import account_ownership_required
 from .models import User
@@ -17,15 +17,10 @@ has_ownership = [
 # Create your views here.
 
 
-class TestHomeView(ListView):
-    model = User
-    template_name = 'accountApp/testhome.html'
-
-
 class AccountCreateView(CreateView):
     model = User
     form_class = AccountCreationForm
-    success_url = reverse_lazy('accountApp:detail')
+    success_url = reverse_lazy('mainApp:main')
     context_object_name = 'target_user'
     template_name = 'accountApp/create.html'
 
@@ -50,7 +45,7 @@ class AccountUpdateView(UpdateView):
     model = User
     context_object_name = 'target_user'
     template_name = 'accountApp/update.html'
-    success_url = reverse_lazy('accountApp:testhome')
+    success_url = reverse_lazy('mainApp:main')
     form_class = AccountCreationForm
 
 @method_decorator(has_ownership, 'get')
@@ -58,7 +53,6 @@ class AccountUpdateView(UpdateView):
 class AccountDeleteView(DeleteView) :
     model = User
     context_object_name = 'target_user'
-    success_url = reverse_lazy('accountApp:testhome')
+    success_url = reverse_lazy('mainApp:main')
     template_name = 'accountApp/delete.html'
-
 
