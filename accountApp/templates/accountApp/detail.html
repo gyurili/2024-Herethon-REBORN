@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+
+    <img src="{{ target_user.image.url }}" alt=""
+         style="height: 8rem; width: 8rem; border-radius:20rem; margin-bottom: 2rem">
+
+    <h2>
+        {{ target_user.nickname }}
+    </h2>
+
+
+    {% if target_user == user %}
+    <a class="material-icons"
+       style="box-shadow: 0 0 4px #ccc; border-radius:10rem; padding: .4rem ;"
+       href="{% url 'accountApp:update' pk=user.pk %}">
+        settings
+    </a>
+    <a class="material-icons"
+       style="box-shadow: 0 0 4px #ccc; border-radius:10rem; padding: .4rem ;"
+       href="{% url 'accountApp:delete' pk=user.pk %}">
+        cancel
+    </a>
+
+<!--        <form-->
+<!--            action="{% url 'accountApp:delete' pk=user.pk %}">-->
+<!--          <button type="submit">Quit</button>-->
+<!--        </form>-->
+
+    {% endif %}
+
+    </div>
+
+</body>
+</html>
