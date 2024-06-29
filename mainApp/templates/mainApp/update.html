@@ -17,6 +17,11 @@
         {% endif %}
         이미지 변경 - <input type="file" name="image"><br><br>
 
+        {% if post.file %}
+            기존 파일 : <a href="{{ post.file.url }}" download>다운로드 {{ post.file.name }}</a>
+        {% endif %}<br><br>
+        파일 변경 - <input type="file" name="file"><br><br>
+
         
         <input type="submit" value="수정하기">
     </form>
