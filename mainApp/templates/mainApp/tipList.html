@@ -10,6 +10,14 @@
     <a href="{% url 'mainApp:main' %}">뒤로가기</a>
     <hr>
 
+    <!-- 검색 폼 -->
+    <form method="get" action="{% url 'mainApp:challengeList' %}">
+        <label for="query">검색:</label>
+        <input type="text" id="query" name="query" value="{{ request.GET.query }}">
+        <button type="submit">검색</button>
+    </form>
+    <hr>
+
     <!-- 정렬 기준 -->
     <form method="get" id="sortForm">
         <label for="sort">정렬 기준:</label>

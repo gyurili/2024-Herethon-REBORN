@@ -10,6 +10,14 @@
     <a href="{% url 'mainApp:main' %}">뒤로가기</a>
     <hr>
 
+    <!-- 검색 폼 -->
+    <form method="get" action="{% url 'mainApp:challengeList' %}">
+        <label for="query">검색:</label>
+        <input type="text" id="query" name="query" value="{{ request.GET.query }}">
+        <button type="submit">검색</button>
+    </form>
+    <hr>
+
     <!-- 정렬 기준 -->
     <form method="get" id="sortForm">
         <label for="sort">정렬 기준:</label>
@@ -24,7 +32,7 @@
     {% for post in posts %}
         <p>작성자 - {{ post.author.nickname }}</p>
         {% if post.author.image %}
-                <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
+            <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
         {% endif %}
         <p>작성일 - {{ post.created_at }}</p>
         <p>하트 수 - {{ post.like.count }}</p>

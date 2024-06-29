@@ -25,12 +25,17 @@
     <p>작성자 - {{ post.author.nickname }}</p>
     <p>작성일 - {{ post.created_at }}</p>
     <h2>제목 - {{ post.title }}</h2>
-    <p>내용 - {{ post.content }}</p>
+    <p>내용 - {{ post.content }}</p><br>
     
+    {% if post.file %}
+        <a href="{{ post.file.url }}" download>{{ post.file.name }} 파일 다운</a>
+    {% endif %}<br><br>
 
     {% if post.image %}
         <img width="320" height="240" src="{{ post.image.url }}">
-    {% endif %}
+    {% endif %}<br>
+
+    
 
     <p>하트 - {{ post.like.count }}
         {% if request.user in post.like.all %}
