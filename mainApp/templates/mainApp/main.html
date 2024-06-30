@@ -35,7 +35,7 @@
     <h1> home </h1>
     <a href="{% url 'mainApp:create' %}">글 작성</a><br>
     <a href="{% url 'mainApp:challengeList' %}">챌린지 게시판</a><br>
-    <a href="{% url 'mainApp:tipList' %}">공유 게시판</a><br>
+    <a href="{% url 'mainApp:tipList' %}">공유 게시판</a><br><br>
 
 
     <!--   로그인이 되어 있지 않으면   -->
@@ -55,11 +55,18 @@
         {% csrf_token %}
         <button type="submit">logout</button>
     </form>
-    <br><br><br><br>
+    <br><br>
 
 
-    {% endif %} <br><br>
+    {% endif %} <br>
 
+    <!-- 검색 폼 -->
+    <form method="get" action="{% url 'mainApp:challengeList' %}">
+        <label for="query">검색:</label>
+        <input type="text" id="query" name="query" value="{{ request.GET.query }}">
+        <button type="submit">검색</button>
+    </form><br><br>
+    
 
 
     <h2>오늘의 인기 보드</h2>
@@ -103,7 +110,7 @@
                     {% endif %}
                     <div class="post-details">
                         <h4> {{ post.author.nickname }} </h4>
-                        <p> {{ post.title }} </p>
+                        <p><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
                         <p> like count: {{ post.like.count }} </p>
                         <p> comment count: {{ post.comment.count }} </p>
                     </div>

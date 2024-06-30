@@ -21,8 +21,8 @@ def main(request):
                 .order_by('-like_count', '-id')[:3]
 
     today_posts = Post.objects.filter(created_at__date=today) \
-                   .annotate(like_count=models.Count('like')) \
-                   .order_by('-like_count', '-id')
+                .annotate(like_count=models.Count('like')) \
+                .order_by('-like_count', '-id')
 
     # 오늘 게시글 순위
     day_most_liked_post = today_posts.first()
@@ -33,10 +33,15 @@ def main(request):
     else :
         user_post = 0
     user_post_rank = list(today_posts).index(user_post) + 1 if user_post else 0
+    
+    # 검색
+    query = request.GET.get('query', '')
+    if query:
+        posts = posts.filter(Q(title__icontains=query) | Q(content__icontains=query))
 
 
     return render(request, "mainApp/main.html", {'object_list': users, 'day_most_liked_post':day_most_liked_post,
-                                                 'weekly_posts':weekly_posts, 'user_post_rank':user_post_rank})
+                                                'weekly_posts':weekly_posts, 'user_post_rank':user_post_rank, 'query': query})
 
 # 챌린지 게시판 리스트
 def challengeList(request):
