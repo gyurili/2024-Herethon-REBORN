@@ -4,8 +4,39 @@
     <meta charset="UTF-8">
     <title>메인 페이지</title>
 </head>
+<style>
+    .post-container {
+        display: flex;
+        align-items: center;
+    }
+    .post-image {
+        margin-right: 10px;
+    }
+    .post-details {
+        display: flex;
+        flex-direction: column;
+    }
+    .post-details h4, .post-details p {
+        margin: 0;
+    }
+
+    .dashboard {
+        display: flex;
+        flex-wrap: nowrap; /* 요소들을 한 줄에 나열하도록 설정합니다. */
+        justify-content: space-between; /* 요소들을 동일한 간격으로 배치합니다. */
+    }
+    .dashboard .container {
+        flex: 0 0 30%; /* 각 container의 너비를 설정합니다. */
+        padding: 10px; /* 각 container 사이의 간격을 조정합니다. */
+        border: 1px solid #ccc; /* 각 container에 테두리를 추가합니다. */
+    }
+</style>
 <body>
     <h1> home </h1>
+    <a href="{% url 'mainApp:create' %}">글 작성</a><br>
+    <a href="{% url 'mainApp:challengeList' %}">챌린지 게시판</a><br>
+    <a href="{% url 'mainApp:tipList' %}">공유 게시판</a><br><br>
+
 
     <!--   로그인이 되어 있지 않으면   -->
     {% if not user.is_authenticated %}
@@ -24,11 +55,70 @@
         {% csrf_token %}
         <button type="submit">logout</button>
     </form>
-    {% endif %} <br><br>
+    <br><br>
 
-    <a href="{% url 'mainApp:create' %}">글 작성</a><br>
-    <a href="{% url 'mainApp:challengeList' %}">챌린지 게시판</a><br>
-    <a href="{% url 'mainApp:tipList' %}">공유 게시판</a><br>
+
+    {% endif %} <br>
+
+    <!-- 검색 폼 -->
+    <form method="get" action="{% url 'mainApp:challengeList' %}">
+        <label for="query">검색:</label>
+        <input type="text" id="query" name="query" value="{{ request.GET.query }}">
+        <button type="submit">검색</button>
+    </form><br><br>
+    
+
+
+    <h2>오늘의 인기 보드</h2>
+    <div class="dashboard">
+        <div class="container">
+            <h3>오늘 내 챌린지 랭킹은? </h3>
+            {% if user_post_rank == 0 %}
+                <p>오늘 내 랭킹이 없습니다</p>
+            {% else %}
+                <p>{{ user_post_rank }}</p>
+            {% endif %}
+        </div>
+        <br><br>
+        <div class="container">
+            <h3>오늘의 1위 글 보기</h3>
+            {% if day_most_liked_post %}
+                <a href="{% url 'mainApp:detail' day_most_liked_post.pk %}?next={{ request.path }}">
+                    <span>{{ day_most_liked_post.title }}</span>
+                </a>
+            {% else %}
+                <p>아직 오늘의 1위글이 없습니다</p>
+            {% endif %}
+        </div>
+        <br><br>
+        <div class="container">
+            <h3>나도 챌린지에 참여하기</h3>
+            <a href="{% url 'mainApp:create' %}">참여하러 가기</a><br>
+        </div>
+    </div>
+    <br><br><br><br>
+
+    <div class="이번 주 인기글">
+        <h3>이번 주 인기글</h3>
+        {% if weekly_posts %}
+            {% for post in weekly_posts %}
+                <div class="post-container">
+                    {% if post.image %}
+                        <div class="post-image">
+                            <img width="80" height="60" src="{{ post.image.url }}">
+                        </div>
+                    {% endif %}
+                    <div class="post-details">
+                        <h4> {{ post.author.nickname }} </h4>
+                        <p><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
+                        <p> like count: {{ post.like.count }} </p>
+                        <p> comment count: {{ post.comment.count }} </p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+        {% endif %}
+    </div>
 
 </body>
 </html>
