@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -7,7 +9,29 @@ from accountApp.models import *
 # 메인 홈
 def main(request):
     users = User.objects.all()
-    return render(request, "mainApp/main.html", {'object_list': users})
+    # 오늘 날짜
+    today = date.today()
+    start_of_week = today - timedelta(days=today.weekday())
+
+    # 이번주 상위 3개의 게시글
+    weekly_posts = Post.objects.filter(created_at__date__gte=start_of_week) \
+                .annotate(like_count=models.Count('like')) \
+                .order_by('-like_count', '-id')[:3]
+
+    today_posts = Post.objects.filter(created_at__date=today) \
+                   .annotate(like_count=models.Count('like')) \
+                   .order_by('-like_count', '-id')
+
+    # 오늘 게시글 순위
+    day_most_liked_post = today_posts.first()
+
+    # 사용자 게시글 순위
+    user_post = today_posts.filter(author=request.user).first()
+    user_post_rank = list(today_posts).index(user_post) + 1 if user_post else 0
+
+
+    return render(request, "mainApp/main.html", {'object_list': users, 'day_most_liked_post':day_most_liked_post,
+                                                 'weekly_posts':weekly_posts, 'user_post_rank':user_post_rank})
 
 # 챌린지 게시판 리스트
 def challengeList(request):
