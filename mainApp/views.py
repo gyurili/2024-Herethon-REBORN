@@ -26,7 +26,10 @@ def main(request):
     day_most_liked_post = today_posts.first()
 
     # 사용자 게시글 순위
-    user_post = today_posts.filter(author=request.user).first()
+    if  today_posts.filter(author=request.user.id):
+        user_post = today_posts.filter(author=request.user.id).first()
+    else :
+        user_post = 0
     user_post_rank = list(today_posts).index(user_post) + 1 if user_post else 0
 
 
