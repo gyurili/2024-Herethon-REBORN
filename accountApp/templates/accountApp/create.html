@@ -19,17 +19,18 @@
         <form action="{% url 'accountApp:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
-                {{ form.email.label_tag }}
+                <h5>아이디</h5>
                 {{ form.email }}
                 <button type="button" id="check-email-btn" class="btn btn-primary">Check Email</button>
+                <div id="email-check-result"></div>
             </div>
             <div class="form-group">
-                {{ form.password1.label_tag }}
+                <h5>비밀번호</h5>
                 {{ form.password1 }}
                 <button type="button" id="toggle-password1-btn" class="btn btn-secondary">Show Password</button>
             </div>
             <div class="form-group">
-                {{ form.password2.label_tag }}
+                <h5>비밀번호 재확인</h5>
                 {{ form.password2 }}
                 <button type="button" id="toggle-password2-btn" class="btn btn-secondary">Show Password</button>
             </div>
@@ -40,7 +41,7 @@
             </div>
             <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
         </form>
-        <div id="email-check-result"></div>
+
     </div>
 
     <script>
@@ -79,6 +80,8 @@
                 $(this).text(btnText);
             });
         });
+
+
     </script>
 </body>
 </html>
