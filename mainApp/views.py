@@ -68,16 +68,20 @@ def tipList(request):
     category = get_object_or_404(Category, id=2)
     sort = request.GET.get('sort', 'latest')
     query = request.GET.get('query', '')
-    
+
+    posts = category.posts.all()
+
     if query:
         posts = posts.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        
+
     if sort == 'likes':
-        posts = category.posts.all().annotate(like_count=models.Count('like')).order_by('-like_count', '-id')
+        posts = posts.annotate(like_count=models.Count('like')).order_by('-like_count', '-id')
     else:
-        posts = category.posts.all().order_by('-id')
-    
-    return render(request, 'mainApp/tipList.html', {'posts': posts, 'categories': categories, 'sort': sort})
+        posts = posts.order_by('-id')
+
+    return render(request, 'mainApp/tipList.html', {'posts': posts, 'categories': categories, 'sort': sort, 'query': query})
+
+
 
 # 글 작성
 @login_required
