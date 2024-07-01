@@ -11,7 +11,7 @@
     <hr>
 
     <!-- 검색 폼 -->
-    <form method="get" action="{% url 'mainApp:challengeList' %}">
+    <form method="get" action="{% url 'mainApp:tipList' %}">
         <label for="query">검색:</label>
         <input type="text" id="query" name="query" value="{{ request.GET.query }}">
         <button type="submit">검색</button>
