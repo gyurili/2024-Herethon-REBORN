@@ -14,14 +14,21 @@
         <div>
             <form action="" method="post">
                 {% csrf_token %}
-    <!--            {{ form }}-->
-                {% bootstrap_form form %}
-    <!--            mt: margin top 3배로/ col-6: 12가 100% -> 6은 50%-->
+                <div>
+                    <h5>아이디</h5>
+                    {{ form.username }}
+
+                    <h5>비밀번호</h5>
+                    {{ form.password }}
+                </div>
                 <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+
+            </form>
+            <form action="{% url 'accountApp:create' %}" method="get">
+                <button type="submit">회원가입</button>
             </form>
         </div><br><br>
 
-        <a href="{% url 'accountApp:create' %}">회원가입</a>
     </div>
 
 </body>
