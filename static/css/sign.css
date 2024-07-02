@@ -94,6 +94,11 @@ button {
   margin-bottom: 0px;
 }
 
+.form-group .profile {
+  display: flex;
+  flex-direction: row;
+}
+
 ::placeholder {
   color: var(--00, #000);
   font-family: "Noto Sans KR";
@@ -124,6 +129,7 @@ input[name="nickname"] {
   border-radius: 20px;
   outline: none;
   display: inline-block;
+  margin-left: -20px;
 }
 
 p {
@@ -154,4 +160,16 @@ input[type="submit"].btn.btn-dark.rounded-pill.col-6.mt-3 {
   line-height: normal;
 
   margin-bottom: 42px;
+}
+
+.basicProfile {
+  width: 59px;
+  height: 59px;
+  flex-shrink: 0;
+  border-radius: 100%;
+}
+
+.profile {
+  margin-left: 47px;
+  margin-top: -30px;
 }

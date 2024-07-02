@@ -124,7 +124,10 @@ textarea::-webkit-scrollbar {
 }
 
 .fileUpload {
+  display: flex;
+  flex-direction: row;
   margin-top: 16px;
+  margin-bottom: -40px;
 }
 
 label {
@@ -136,11 +139,13 @@ label {
 .btn-upload {
   border: none;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
 }
 
 .masterUpload {
   margin-left: 251px;
-  margin-bottom: 15px;
+  margin-bottom: 32px;
   border: none;
   width: 75px;
   height: 31px;
