@@ -1,87 +1,136 @@
 <!DOCTYPE html>
 {% load bootstrap4 %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Sign Up</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<style>
-        .form-group {
-            margin-bottom: 20px;
-        }
-    </style>
-<body>
-    <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
-        <div class="mb-4">
-            <h4>Sign Up</h4>
-        </div>
-        <form action="{% url 'accountApp:create' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-                <h5>아이디</h5>
-                {{ form.email }}
-                <button type="button" id="check-email-btn" class="btn btn-primary">Check Email</button>
-                <div id="email-check-result"></div>
-            </div>
-            <div class="form-group">
-                <h5>비밀번호</h5>
-                {{ form.password1 }}
-                <button type="button" id="toggle-password1-btn" class="btn btn-secondary">Show Password</button>
-            </div>
-            <div class="form-group">
-                <h5>비밀번호 재확인</h5>
-                {{ form.password2 }}
-                <button type="button" id="toggle-password2-btn" class="btn btn-secondary">Show Password</button>
-            </div>
-            <div class="form-group">
-                <h5>프로필 설정</h5>
-                {{ form.image }}
-                {{ form.nickname }}
-            </div>
-            <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
-        </form>
+    <link rel="stylesheet" href="./create.css" />
 
-    </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <style>
+    .form-group {
+      margin-bottom: 20px;
+    }
+  </style>
+  <body>
+    <header>
+      <div class="mb-4">
+        <h4>회원가입</h4>
+      </div>
+    </header>
+    <form
+      action="{% url 'accountApp:create' %}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="form-group">
+        <h5>아이디</h5>
+        {{ form.email }}
+        <button type="button" id="check-email-btn" class="btn btn-primary">
+          <svg
+            width="80"
+            height="25"
+            viewBox="0 0 80 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="80" height="25" rx="12.5" fill="#66FF91" />
+            <path
+              d="M24.93 13.28H26.25V14.91H24.93V13.28ZM21.4 12.83H29.78V13.89H21.4V12.83ZM25.57 14.54C26.57 14.54 27.3567 14.6867 27.93 14.98C28.5033 15.2667 28.79 15.68 28.79 16.22C28.79 16.7467 28.5033 17.1567 27.93 17.45C27.3567 17.7433 26.57 17.89 25.57 17.89C24.57 17.89 23.7833 17.7433 23.21 17.45C22.6433 17.1567 22.36 16.7467 22.36 16.22C22.36 15.68 22.6433 15.2667 23.21 14.98C23.7833 14.6867 24.57 14.54 25.57 14.54ZM25.57 15.55C25.1567 15.55 24.81 15.5733 24.53 15.62C24.2567 15.6667 24.05 15.74 23.91 15.84C23.77 15.9333 23.7 16.06 23.7 16.22C23.7 16.3667 23.77 16.49 23.91 16.59C24.05 16.69 24.2567 16.7633 24.53 16.81C24.81 16.8567 25.1567 16.88 25.57 16.88C25.9833 16.88 26.3267 16.8567 26.6 16.81C26.88 16.7633 27.09 16.69 27.23 16.59C27.37 16.49 27.44 16.3667 27.44 16.22C27.44 16.06 27.37 15.9333 27.23 15.84C27.09 15.74 26.88 15.6667 26.6 15.62C26.3267 15.5733 25.9833 15.55 25.57 15.55ZM24.68 9.5H25.86V9.72C25.86 10 25.81 10.2667 25.71 10.52C25.61 10.7733 25.46 11.01 25.26 11.23C25.0667 11.4433 24.8233 11.6367 24.53 11.81C24.2367 11.9833 23.8967 12.1267 23.51 12.24C23.1233 12.3533 22.6933 12.4333 22.22 12.48L21.76 11.43C22.1667 11.3967 22.5267 11.34 22.84 11.26C23.16 11.18 23.4333 11.0833 23.66 10.97C23.8933 10.85 24.0833 10.7233 24.23 10.59C24.3833 10.45 24.4967 10.3067 24.57 10.16C24.6433 10.0133 24.68 9.86667 24.68 9.72V9.5ZM25.33 9.5H26.5V9.72C26.5 9.86667 26.5367 10.0167 26.61 10.17C26.6833 10.3167 26.7933 10.4567 26.94 10.59C27.0933 10.7233 27.2833 10.85 27.51 10.97C27.7433 11.0833 28.0167 11.18 28.33 11.26C28.65 11.34 29.0133 11.3967 29.42 11.43L28.96 12.48C28.4867 12.4333 28.0567 12.3533 27.67 12.24C27.2833 12.1267 26.9433 11.9867 26.65 11.82C26.3633 11.6467 26.12 11.4533 25.92 11.24C25.7267 11.02 25.58 10.7833 25.48 10.53C25.38 10.27 25.33 10 25.33 9.72V9.5ZM22.17 9.01H29.03V10.06H22.17V9.01ZM30.5992 13.2H38.9792V14.26H30.5992V13.2ZM34.1192 12.02H35.4392V13.42H34.1192V12.02ZM31.5292 14.9H37.9692V17.89H36.6392V15.94H31.5292V14.9ZM31.6692 8.86H32.9792V9.67H36.5992V8.86H37.9192V12.43H31.6692V8.86ZM32.9792 10.67V11.39H36.5992V10.67H32.9792ZM41.8984 12.86H43.2284V14.18H41.8984V12.86ZM45.8184 8.63H47.1484V14.94H45.8184V8.63ZM46.6884 11.27H48.3184V12.37H46.6884V11.27ZM39.8484 14.75L39.6984 13.72C40.2518 13.72 40.8518 13.7167 41.4984 13.71C42.1518 13.7033 42.8118 13.6833 43.4784 13.65C44.1451 13.61 44.7918 13.5533 45.4184 13.48L45.5184 14.39C44.8718 14.5033 44.2151 14.5867 43.5484 14.64C42.8818 14.6867 42.2318 14.7167 41.5984 14.73C40.9718 14.7367 40.3884 14.7433 39.8484 14.75ZM40.8684 15.3H47.1484V17.89H45.8184V16.33H40.8684V15.3ZM39.9284 9.3H45.1884V10.26H39.9284V9.3ZM42.5584 10.48C43.2451 10.48 43.7918 10.6033 44.1984 10.85C44.6118 11.09 44.8184 11.4233 44.8184 11.85C44.8184 12.2767 44.6118 12.6133 44.1984 12.86C43.7918 13.1067 43.2451 13.23 42.5584 13.23C41.8784 13.23 41.3318 13.1067 40.9184 12.86C40.5118 12.6133 40.3084 12.2767 40.3084 11.85C40.3084 11.4233 40.5118 11.09 40.9184 10.85C41.3318 10.6033 41.8784 10.48 42.5584 10.48ZM42.5584 11.34C42.2451 11.34 42.0018 11.3833 41.8284 11.47C41.6551 11.5567 41.5684 11.6833 41.5684 11.85C41.5684 12.0167 41.6551 12.1467 41.8284 12.24C42.0018 12.3267 42.2451 12.37 42.5584 12.37C42.8718 12.37 43.1151 12.3267 43.2884 12.24C43.4684 12.1467 43.5584 12.0167 43.5584 11.85C43.5584 11.6833 43.4684 11.5567 43.2884 11.47C43.1151 11.3833 42.8718 11.34 42.5584 11.34ZM41.8984 8.55H43.2284V9.74H41.8984V8.55ZM55.3677 8.63H56.6977V15.28H55.3677V8.63ZM50.5277 16.66H56.9377V17.73H50.5277V16.66ZM50.5277 14.62H51.8577V17.1H50.5277V14.62ZM51.6577 9.22C52.131 9.22 52.5577 9.32 52.9377 9.52C53.3177 9.72 53.6177 9.99667 53.8377 10.35C54.0643 10.7033 54.1777 11.11 54.1777 11.57C54.1777 12.0167 54.0643 12.42 53.8377 12.78C53.6177 13.1333 53.3177 13.4133 52.9377 13.62C52.5577 13.82 52.131 13.92 51.6577 13.92C51.1843 13.92 50.7577 13.82 50.3777 13.62C49.9977 13.4133 49.6943 13.1333 49.4677 12.78C49.2477 12.42 49.1377 12.0167 49.1377 11.57C49.1377 11.11 49.2477 10.7033 49.4677 10.35C49.6943 9.99667 49.9977 9.72 50.3777 9.52C50.7577 9.32 51.1843 9.22 51.6577 9.22ZM51.6577 10.36C51.431 10.36 51.2243 10.41 51.0377 10.51C50.851 10.6033 50.7043 10.74 50.5977 10.92C50.491 11.0933 50.4377 11.31 50.4377 11.57C50.4377 11.8167 50.491 12.03 50.5977 12.21C50.7043 12.3833 50.851 12.52 51.0377 12.62C51.2243 12.7133 51.431 12.76 51.6577 12.76C51.8843 12.76 52.091 12.7133 52.2777 12.62C52.4643 12.52 52.611 12.3833 52.7177 12.21C52.8243 12.03 52.8777 11.8167 52.8777 11.57C52.8777 11.31 52.8243 11.0933 52.7177 10.92C52.611 10.74 52.4643 10.6033 52.2777 10.51C52.091 10.41 51.8843 10.36 51.6577 10.36Z"
+              fill="black"
+            />
+          </svg>
+        </button>
+        <div id="email-check-result"></div>
+      </div>
+
+      <div class="form-group">
+        <h5>비밀번호</h5>
+        {{ form.password1 }}
+        <button
+          type="button"
+          id="toggle-password1-btn"
+          class="btn btn-secondary"
+        >
+          <img
+            class="password-icon"
+            src="./images/눈뜬아이콘.png"
+            alt="Show Password"
+          />
+        </button>
+      </div>
+      <div class="form-group">
+        <h5>비밀번호 재확인</h5>
+        {{ form.password2 }}
+        <button
+          type="button"
+          id="toggle-password2-btn"
+          class="btn btn-secondary"
+        >
+          Show Password
+        </button>
+      </div>
+      <div class="form-group">
+        <h5>프로필 설정</h5>
+        {{ form.image }} {{ form.nickname }}
+      </div>
+      <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3" />
+    </form>
 
     <script>
-        $(document).ready(function() {
-            $('#check-email-btn').click(function() {
-                var email = $('#id_email').val();
-                $.ajax({
-                    url: "{% url 'accountApp:check_email' %}",
-                    data: {
-                        'email': email
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.is_taken) {
-                            $('#email-check-result').html('<p style="color: red;">Email is already taken.</p>');
-                        } else {
-                            $('#email-check-result').html('<p style="color: green;">Email is available.</p>');
-                        }
-                    }
-                });
-            });
-
-            $('#toggle-password1-btn').click(function() {
-                var passwordField = $('#id_password1');
-                var type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-                passwordField.attr('type', type);
-                var btnText = type === 'password' ? 'Show Password' : 'Hide Password';
-                $(this).text(btnText);
-            });
-
-            $('#toggle-password2-btn').click(function() {
-                var passwordField = $('#id_password2');
-                var type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-                passwordField.attr('type', type);
-                var btnText = type === 'password' ? 'Show Password' : 'Hide Password';
-                $(this).text(btnText);
-            });
+      $(document).ready(function () {
+        $("#check-email-btn").click(function () {
+          var email = $("#id_email").val();
+          $.ajax({
+            url: "{% url 'accountApp:check_email' %}",
+            data: {
+              email: email,
+            },
+            dataType: "json",
+            success: function (data) {
+              if (data.is_taken) {
+                $("#email-check-result").html(
+                  '<p style="color: red;">Email is already taken.</p>'
+                );
+              } else {
+                $("#email-check-result").html(
+                  '<p style="color: green;">Email is available.</p>'
+                );
+              }
+            },
+          });
         });
 
+        $("#toggle-password1-btn").click(function () {
+          var passwordField = $("#id_password1");
+          var type =
+            passwordField.attr("type") === "password" ? "text" : "password";
+          passwordField.attr("type", type);
+          var imgSrc =
+            type === "password"
+              ? "./images/눈뜬아이콘.png"
+              : "./images/눈감은아이콘.png";
+          $(this).find(".password-icon").attr("src", imgSrc);
+        });
 
+        $("#toggle-password2-btn").click(function () {
+          var passwordField = $("#id_password2");
+          var type =
+            passwordField.attr("type") === "password" ? "text" : "password";
+          passwordField.attr("type", type);
+          var btnText = type === "password" ? "Show Password" : "Hide Password";
+          $(this).text(btnText);
+        });
+      });
     </script>
-</body>
+    <script src="./create.js"></script>
+  </body>
 </html>
