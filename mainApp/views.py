@@ -66,7 +66,7 @@ def ranking(request):
     user_post_rank = list(monthly_posts).index(user_post) + 1 if user_post else 0
 
     return render(request, "mainApp/ranking.html", {'object_list': users, 'user_posts_count': user_posts_count, 'user_posts_monthly_count':user_posts_monthly_count,
-                                                 'user_post':user_post, 'monthly_posts': monthly_posts, 'user_post_rank': user_post_rank})
+                                                'user_post':user_post, 'monthly_posts': monthly_posts, 'user_post_rank': user_post_rank})
 
 
 
@@ -234,3 +234,7 @@ def remove_like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.like.remove(request.user)
     return redirect('mainApp:detail', post_id)
+
+# 알림
+def notice(request):
+    return render(request, "mainApp/notice.html")

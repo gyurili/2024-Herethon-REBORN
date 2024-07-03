@@ -21,4 +21,7 @@ urlpatterns = [
     # 좋아요
     path('add-like/<int:post_id>/', add_like, name='add_like'),
     path('remove-like/<int:post_id>/', remove_like, name='remove_like'),
+
+    # 알림
+    path('notice/', notice, name='notice'),
 ]
