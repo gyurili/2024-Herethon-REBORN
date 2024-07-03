@@ -1,0 +1,208 @@
+body {
+  width: 375px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: rgb(198, 198, 198);
+}
+
+header {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  background-color: #66ff91;
+  width: 375px;
+  height: 50px;
+  align-items: center;
+}
+
+.back {
+  margin-left: 14px;
+}
+
+.bottom {
+  padding-top: 50px;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+h2 {
+  margin-left: 132px;
+  margin-right: 131px;
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.commentTitle {
+  color: rgba(0, 0, 0, 0.25);
+  font-family: "Noto Sans KR";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 24px;
+}
+
+.reaction {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 13px;
+}
+
+.heart {
+  width: 17px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.comments {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+p {
+  margin: 0px;
+  color: rgba(0, 0, 0, 0.45);
+  font-family: "Noto Sans KR";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.15px;
+  margin-left: 4px;
+  margin-right: 11px;
+}
+
+.area {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin: 0px 0 20px 0;
+}
+
+.reactionLine {
+  width: 313px;
+  height: 0.5px;
+  margin-top: 11px;
+  margin-bottom: 17px;
+}
+
+.division {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.detailcomment {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.profilePhoto {
+  display: flex;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  border-radius: 27px;
+  margin-top: -22px;
+  background: url(<path-to-image>) lightgray 50% / cover no-repeat, #d9d9d9;
+}
+
+.nickname {
+  color: #000;
+  font-family: "Noto Sans KR";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.date {
+  color: rgba(0, 0, 0, 0.45);
+  font-family: "Noto Sans KR";
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 11px;
+}
+
+.commentContent {
+  color: #000;
+  font-family: "Noto Sans KR";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.write {
+  margin-left: -24px;
+  width: 375px;
+  height: 60px;
+  flex-shrink: 0;
+  background-color: var(--gray, rgba(29, 29, 29, 0.85));
+  display: flex;
+  flex-direction: row;
+}
+
+.write div {
+  display: flex;
+  flex-direction: row;
+}
+
+.delete {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: 26.98px;
+  margin-top: -35px;
+}
+
+.delete-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+::placeholder {
+  color: rgba(0, 0, 0, 0.25);
+  font-family: "Noto Sans KR";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 14px;
+  border: none;
+}
+
+.commentInput {
+  width: 309px;
+  height: 35px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50px;
+  background: var(--ff, #fff);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25) inset;
+  margin-top: 12px;
+  margin-left: 12px;
+  border: none;
+}
+
+.submit {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  margin-left: 7px;
+  margin-top: 16px;
+}

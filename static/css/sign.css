@@ -130,6 +130,7 @@ input[name="nickname"] {
   outline: none;
   display: inline-block;
   margin-left: -20px;
+  margin-right: 8px;
 }
 
 p {
@@ -160,6 +161,7 @@ input[type="submit"].btn.btn-dark.rounded-pill.col-6.mt-3 {
   line-height: normal;
 
   margin-bottom: 42px;
+  margin-top: 10px;
 }
 
 .basicProfile {
@@ -172,4 +174,14 @@ input[type="submit"].btn.btn-dark.rounded-pill.col-6.mt-3 {
 .profile {
   margin-left: 47px;
   margin-top: -30px;
+}
+
+#nickname-check-result {
+  margin-top: 0px;
+  margin-left: 77px;
+  color: #fff;
+  font-family: "Noto Sans KR";
+  font-size: 10px;
+  font-weight: 300;
+  line-height: normal;
 }
