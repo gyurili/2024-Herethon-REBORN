@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>랭킹</title>
+</head>
+<style>
+    .post-container {
+        display: flex;
+        align-items: center;
+    }
+    .post-image {
+        margin-right: 10px;
+    }
+    .post-details {
+        display: flex;
+        flex-direction: column;
+    }
+    .post-details h4, .post-details p {
+        margin: 0;
+    }
+
+    .dashboard {
+        display: flex;
+        flex-wrap: nowrap; /* 요소들을 한 줄에 나열하도록 설정합니다. */
+        justify-content: space-between; /* 요소들을 동일한 간격으로 배치합니다. */
+    }
+    .dashboard .container {
+        flex: 0 0 30%; /* 각 container의 너비를 설정합니다. */
+        padding: 10px; /* 각 container 사이의 간격을 조정합니다. */
+        border: 1px solid #ccc; /* 각 container에 테두리를 추가합니다. */
+    }
+</style>
+<body>
+    <h3>랭킹</h3>
+    <a href="{% url 'mainApp:main' %}">뒤로가기</a>
+
+
+    <!--   로그인이 되어 있지 않으면   -->
+    {% if not user.is_authenticated %}
+    {% else %}
+    {% endif %} <br>
+
+    <div class="오늘의 챌린지 왕">
+        <h2>오늘의 챌린지 왕</h2>
+        {% if monthly_posts %}
+            {% for post in monthly_posts %}
+                {% if forloop.counter < 4 %}
+                <div class="post-container">
+                    <p> rank: {{ forloop.counter }} </p>
+                    {% if post.author.image %}
+                        <div class="post-image">
+                            <img width="80" height="60" src="{{ post.author.image.url }}">
+                        </div>
+                    {% endif %}
+                    <div class="post-details">
+                        <h4> {{ post.author.nickname }} </h4>
+                        <p> like count: {{ post.like.count }} </p>
+                        <br>
+                    </div>
+                </div>
+                {% endif %}
+
+            {% endfor %}
+        {% else %}
+        {% endif %}
+    </div>
+
+
+
+    <br><br>
+
+
+    <div class="전체 랭킹 확인하기">
+        <h3>전체 랭킹 확인하기</h3>
+        {% if monthly_posts %}
+            {% for post in monthly_posts %}
+                <div class="post-container">
+                    <p> rank: {{ forloop.counter }} </p>
+                    {% if post.image %}
+                        <div class="post-image">
+                            <img width="80" height="60" src="{{ post.image.url }}">
+                        </div>
+                    {% endif %}
+                    <div class="post-details">
+                        <h4> {{ post.author.nickname }} </h4>
+                        <p><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
+                        <p> like count: {{ post.like.count }} </p>
+                        <p> comment count: {{ post.comment.count }} </p>
+                        <br>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+        {% endif %}
+    </div>
+
+
+    <div class="container">
+        <h3>내 랭킹은 몇 위? </h3>
+        {% if user_post %}
+            <p>rank: {{ user_post_rank }}</p>
+            {% if user_post.image %}
+                <div class="post-image">
+                    <img width="80" height="60" src="{{ post.image.url }}">
+                </div>
+            {% endif %}
+            <h4> {{ user_post.author.nickname }} </h4>
+            <p><a href="{% url 'mainApp:detail' user_post.id %}">{{ user_post.title }}</a>
+            <p> like count: {{ user_post.like.count }} </p>
+            <p> comment count: {{ user_post.comment.count }} </p>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <h3>내 챌린지 참여 현황 </h3>
+        <p>이번 달 참여: {{ user_posts_monthly_count }}</p>
+        <p>전체 누적 참여: {{ user_posts_count }}</p>
+    </div>
+
+
+
+
+</body>
+</html>

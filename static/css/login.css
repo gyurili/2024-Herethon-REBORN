@@ -1,0 +1,101 @@
+body {
+  width: 375px;
+  height: 812px;
+  margin: 0 auto;
+  background-color: rgb(198, 198, 198);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+}
+
+.logo {
+  margin-top: 207px;
+  margin-bottom: 37.77px;
+  width: 113.537px;
+  height: 164.232px;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 226px;
+  height: 39px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: none;
+  background: var(--gray, rgba(29, 29, 29, 0.85));
+  outline: none;
+  display: flex;
+  margin-top: 8px;
+  color: #fff;
+  padding-left: 17px;
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+::placeholder {
+  border: none;
+  color: #fff;
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+input[type="submit"] {
+  width: 226px;
+  height: 39px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 20px;
+  background: var(--test_gr, #66ff91);
+  cursor: pointer;
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  justify-content: center;
+  padding: 0px;
+}
+
+.signUp {
+  width: 226px;
+  height: 39px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 20px;
+  background: var(--test_gr, #66ff91);
+  cursor: pointer;
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+
+  margin-bottom: 226px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

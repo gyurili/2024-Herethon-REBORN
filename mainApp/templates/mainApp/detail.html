@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/hyunh.css' %}">
+    <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
 </head>
@@ -118,7 +119,7 @@
             {% endif %}
             {{ post.like.count }}
         </p>
-        <p><img src="../../../media/comment.png" alt="댓글">{{ post.comments.count }}</p>
+        <p><a href="{% url 'mainApp:view_comment' post.id %}"><img src="../../../media/comment.png" alt="댓글"></a>{{ post.comments.count }}</p>
     </div>
 
     <footer class="community_footer">

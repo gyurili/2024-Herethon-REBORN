@@ -43,6 +43,34 @@ def main(request):
     return render(request, "mainApp/main.html", {'object_list': users, 'day_most_liked_post':day_most_liked_post,
                                                 'weekly_posts':weekly_posts, 'user_post_rank':user_post_rank, 'query': query})
 
+
+
+# 랭킹
+def ranking(request):
+    users = User.objects.all()
+    # 오늘 날짜
+    today = date.today()
+    start_of_month = today.replace(day=1)
+
+    # 이번달 게시글
+    monthly_posts = Post.objects.filter(created_at__date__gte=start_of_month) \
+                        .annotate(like_count=models.Count('like')) \
+                        .order_by('-like_count', '-id')
+
+    user_posts_count = Post.objects.filter(author=request.user.id).count()
+    # 사용자가 이번 달에 작성한 게시글 수 계산
+    user_posts_monthly_count = monthly_posts.filter(author=request.user.id).count()
+
+    # 사용자 게시글 순위
+    user_post = monthly_posts.filter(author=request.user.id).first()
+    user_post_rank = list(monthly_posts).index(user_post) + 1 if user_post else 0
+
+    return render(request, "mainApp/ranking.html", {'object_list': users, 'user_posts_count': user_posts_count, 'user_posts_monthly_count':user_posts_monthly_count,
+                                                 'user_post':user_post, 'monthly_posts': monthly_posts, 'user_post_rank': user_post_rank})
+
+
+
+
 # 챌린지 게시판 리스트
 def challengeList(request):
     categories = Category.objects.all()
@@ -69,16 +97,20 @@ def tipList(request):
     category = get_object_or_404(Category, id=2)
     sort = request.GET.get('sort', 'latest')
     query = request.GET.get('query', '')
-    
+
+    posts = category.posts.all()
+
     if query:
         posts = posts.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        
+
     if sort == 'likes':
-        posts = category.posts.all().annotate(like_count=models.Count('like')).order_by('-like_count', '-id')
+        posts = posts.annotate(like_count=models.Count('like')).order_by('-like_count', '-id')
     else:
-        posts = category.posts.all().order_by('-id')
-    
-    return render(request, 'mainApp/tipList.html', {'posts': posts, 'categories': categories, 'sort': sort})
+        posts = posts.order_by('-id')
+
+    return render(request, 'mainApp/tipList.html', {'posts': posts, 'categories': categories, 'sort': sort, 'query': query})
+
+
 
 # 글 작성
 @login_required
@@ -122,6 +154,7 @@ def detail(request, id):
     return render(request, 'mainApp/detail.html', {'post': post, 'category_ids': category_ids})
 
 # 글 수정
+@login_required
 def update(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == "POST":
@@ -142,17 +175,34 @@ def update(request, id):
     return render(request, 'mainApp/update.html', {'post': post})
 
 # 글 삭제
+@login_required
 def delete(request, id):
     post = get_object_or_404(Post, id=id)
-    categories = post.category.all()
+    categories = list(post.category.all())  # 리스트로 변환
+
     post.delete()
 
-    if any(category.id == 1 for category in categories):
+    # 카테고리가 존재하고, 그 중에 ID가 1인 카테고리가 있는지 확인
+    if categories and any(category.id == 1 for category in categories):
         return redirect('mainApp:challengeList')
     else:
         return redirect('mainApp:tipList')
 
+
+# 댓글창 조회
+def view_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == "POST":
+        Comment.objects.create(
+            content=request.POST.get('content'),
+            author=request.user,
+            post=post
+        )
+        return redirect('mainApp:view_comment', post_id)
+    return render(request, 'mainApp/comment.html', {'post': post})
+
 # 댓글 작성
+@login_required
 def create_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == "POST":
@@ -161,24 +211,25 @@ def create_comment(request, post_id):
             author=request.user,
             post=post
         )
-        return redirect('mainApp:detail', post_id)
+        return redirect('mainApp:view_comment', post_id)
 
 # 댓글 삭제
+@login_required
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     if request.user == comment.author:
         comment.delete()
-        return redirect('mainApp:detail', id=comment.post.id)
-    else:
-        return redirect('mainApp:detail', id=comment.post.id)
+    return redirect('mainApp:view_comment', post_id=comment.post.id)
 
 # 하트 누르기
+@login_required
 def add_like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.like.add(request.user)
     return redirect('mainApp:detail', post_id)
 
 # 하트 취소
+@login_required
 def remove_like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.like.remove(request.user)
