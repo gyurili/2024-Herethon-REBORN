@@ -14,7 +14,7 @@
 <body>
     <header class="community_header">
         {% for category in post.category.all %}
-        {% if category.name == "공유 게시판" %}
+        {% if category.name == "정보 공유" %}
         <a href="{% url 'mainApp:tipList' %}"><img src="../../../media/backBtn.png" alt="뒤로가기"
                 class="community_header_back"></a>
         {% else %}
@@ -29,7 +29,7 @@
     <main class="community_main">
         <section class="community_main_sec1">
             {% for category in post.category.all %}
-            {% if category.name == "공유 게시판" %}
+            {% if category.name == "정보 공유" %}
             <div class="community_main_sec1_item focused" data-target="sec2">
                 <a href="{% url 'mainApp:tipList' %}">공유 게시판</a>
             </div>

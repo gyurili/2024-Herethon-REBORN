@@ -43,12 +43,7 @@
       <img class="line" src=".\images\Line.png" alt="" />
       <select name="category" style="font-size: 10px">
         {% for category in categories %}
-        <option value="{{ category.id }}" style="font-size: 10px">
-          챌린지
-        </option>
-        <option value="{{ category.id }}" style="font-size: 10px">
-          정보 공유
-        </option>
+        <option value="{{ category.id }}">{{ category.name }}</option>
         {% endfor %}
       </select>
       <img class="selectLine" src=".\images\selectLine.png" alt="" />
