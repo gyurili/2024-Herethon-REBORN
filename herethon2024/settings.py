@@ -1,6 +1,7 @@
 from pathlib import Path
 import environ
 import os
+from django.contrib.messages import constants as messages
 #import django
 #django.setup()
 
@@ -130,4 +131,18 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'accountApp:login'
+LOGIN_REDIRECT_URL = '/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}

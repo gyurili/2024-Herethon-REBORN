@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
@@ -18,17 +19,17 @@ has_ownership = [
 ]
 
 # Create your views here.
-
 class AccountCreateView(CreateView):
     model = User
     form_class = AccountCreationForm
-    success_url = reverse_lazy('mainApp:main')
+    success_url = reverse_lazy('accountApp:login')
     context_object_name = 'target_user'
     template_name = 'accountApp/create.html'
 
     def form_valid(self, form):
         response = super().form_valid(form)
         print("Form is valid")
+        messages.success(self.request, '회원가입이 완료되었습니다. 로그인 해주세요.')
         return response
 
     def form_invalid(self, form):
@@ -45,9 +46,21 @@ class AccountCreateView(CreateView):
         }
         return JsonResponse(data)
 
+    @staticmethod
+    def check_nickname(request):
+        nickname = request.GET.get('nickname', None)
+        is_taken = User.objects.filter(nickname=nickname).exists()
+        data = {
+            'is_taken': is_taken
+        }
+        return JsonResponse(data)
+
 
 class AccountLoginView(LoginView):
     authentication_form=AccountLoginForm
+    def form_invalid(self, form):
+        messages.error(self.request, 'Invalid username or password.')
+        return super().form_invalid(form)
 
 class AccountDetailView(DetailView):
     model = User
