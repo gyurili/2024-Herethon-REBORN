@@ -1,0 +1,166 @@
+body {
+  width: 375px;
+  height: 812px;
+  margin: 0 auto;
+  background-color: rgb(198, 198, 198);
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  background-color: #66ff91;
+  height: 50px;
+  align-items: center;
+}
+.back {
+  margin-left: 14px;
+}
+
+h2 {
+  margin-left: 121px;
+  margin-right: 121px;
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.bottom {
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.title {
+  border: none;
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: 21px;
+  margin-bottom: 13px;
+}
+::placeholder {
+  border: none;
+  color: black;
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 22px;
+}
+.title:focus {
+  outline: none;
+}
+
+.line {
+  width: 328px;
+  height: 0.5px;
+  background-color: black;
+}
+
+select {
+  display: flex;
+  width: 55px;
+  height: 17px;
+  align-items: flex-end;
+  margin-left: 279px;
+  margin-top: 13px;
+
+  outline: none; /* 선택 시 나타나는 아웃라인 제거 */
+  border: none; /* 선택 상자의 기본 테두리 제거 */ /* 배경 투명 설정 (필요에 따라) */
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+option {
+  font-size: 10px;
+}
+
+.selectLine {
+  margin-left: 279px;
+  width: 50px;
+  height: 0.5px;
+  background-color: black;
+}
+
+textarea {
+  display: flex;
+  width: 328px;
+  height: 470px;
+  resize: none;
+  margin-top: 13px;
+
+  outline: none; /* 선택 시 나타나는 아웃라인 제거 */
+  border: none;
+
+  color: #000;
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.content ::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+}
+
+.fileUpload {
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+  margin-bottom: -40px;
+}
+
+label {
+  width: 31px;
+  height: 31px;
+  padding-bottom: 12px;
+}
+
+.btn-upload {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.masterUpload {
+  margin-left: 251px;
+  margin-bottom: 32px;
+  border: none;
+  width: 75px;
+  height: 31px;
+  border-radius: 50px;
+  background: var(--test_gr, #66ff91);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+#file {
+  display: none;
+}

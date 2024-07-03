@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/hyunh.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>알림</title>
+</head>
+
+<body>
+    <header class="community_header">
+        <a href="{% url 'mainApp:main' %}"><img src="../../../media/backBtn.png" alt="뒤로가기"
+                class="community_header_back"></a>
+        <span class="community_header_title">알림</span>
+        <a href="#" class="community_header_notice"><img src="../../../media/noticeBell.png" alt="알림"></a>
+    </header>
+
+    <main class="community_main">
+        <div class="community_main_scroll">
+            <div class="notice_container">
+                <div class="notice_item">
+                    <img src="../../../media/read_noticeLike.png" alt="알림">
+                    <div class="notice_text">
+                        <p class="notice_title">좋아요</p>
+                        <p class="notice_content">콩콩 님이 내 글에 좋아요를 눌렀습니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="notice_container">
+                <div class="notice_item">
+                    <img src="../../../media/noticeLike.png" alt="알림">
+                    <div class="notice_text">
+                        <p class="notice_title">좋아요</p>
+                        <p class="notice_content">킹콩 님이 내 글에 좋아요를 눌렀습니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="notice_container">
+                <div class="notice_item">
+                    <img src="../../../media/noticeComment.png" alt="알림">
+                    <div class="notice_text">
+                        <p class="notice_title">댓글</p>
+                        <p class="notice_content">모짜 님이 내 글에 댓글을 달았습니다: 너무 센스있는 리폼이 ...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="notice_container">
+                <div class="notice_item">
+                    <img src="../../../media/noticeRank.png" alt="알림">
+                    <div class="notice_text">
+                        <p class="notice_title">랭킹</p>
+                        <p class="notice_content">챌린지 랭킹 내 순위가 올랐습니다! (4위 > 2위)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="notice_container">
+                <div class="notice_item">
+                    <img src="../../../media/read_noticeLike.png" alt="알림">
+                    <div class="notice_text">
+                        <p class="notice_title">좋아요</p>
+                        <p class="notice_content">망각 님이 내 글에 좋아요를 눌렀습니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="notice_container">
+                <div class="notice_item">
+                    <img src="../../../media/read_noticeComment.png" alt="알림">
+                    <div class="notice_text">
+                        <p class="notice_title">댓글</p>
+                        <p class="notice_content">애플 님이 내 글에 댓글을 달았습니다: 안녕하세요! 사용하신 ...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="notice_container">
+                <div class="notice_item">
+                    <img src="../../../media/read_noticeLike.png" alt="알림">
+                    <div class="notice_text">
+                        <p class="notice_title">좋아요</p>
+                        <p class="notice_content">라일락 님이 내 글에 좋아요를 눌렀습니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="notice_container">
+                <div class="notice_item">
+                    <img src="../../../media/read_noticeLike.png" alt="알림">
+                    <div class="notice_text">
+                        <p class="notice_title">좋아요</p>
+                        <p class="notice_content">굼뇽군 님이 내 글에 좋아요를 눌렀습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="community_footer">
+        <div class="community_footer_home">
+            <a href="{% url 'mainApp:main' %}">
+                <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            </a>
+            <p>홈</p>
+        </div>
+        <div class="community_footer_rank">
+            <a href="{% url 'mainApp:ranking' %}">
+                <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            </a>
+            <p>랭킹</p>
+        </div>
+        <div class="community_footer_community">
+            <a href="{% url 'mainApp:tipList' %}">
+                <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            </a>
+            <p>커뮤니티</p>
+        </div>
+        <div class="community_footer_my">
+            {% if not user.is_authenticated %}
+            <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            {% else %}
+            <a href="{% url 'accountApp:detail' pk=user.pk %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
+            {% endif %}
+            <p>MY</p>
+        </div>
+    </footer>
+</body>
+
+</html>
