@@ -60,6 +60,7 @@
         />
       </svg>
     </header>
+
     <div class="bottom">
       <div class="commentTitle">'{{ post.title }}'에 달린 댓글입니다.</div>
       <div class="reaction">
@@ -105,27 +106,27 @@
       {% empty %}
       <div class="no-comments">댓글이 없습니다.</div>
       {% endfor %}
-      <div class="write">
-        <form method="POST" action="{% url 'mainApp:create_comment' post.id %}">
-          {% csrf_token %}
+    </div>
+    <div class="write">
+      <form method="POST" action="{% url 'mainApp:create_comment' post.id %}">
+        {% csrf_token %}
+        <div>
+          <input
+            class="commentInput"
+            type="text"
+            name="content"
+            placeholder="댓글을 작성해주세요..."
+          />
           <div>
             <input
-              class="commentInput"
-              type="text"
-              name="content"
-              placeholder="댓글을 작성해주세요..."
+              type="image"
+              src="{% static 'img\댓글제출.png' %}"
+              value="작성"
+              class="submit"
             />
-            <div>
-              <input
-                type="image"
-                src="{% static 'img\댓글제출.png' %}"
-                value="작성"
-                class="submit"
-              />
-            </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </body>
 </html>
