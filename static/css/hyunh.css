@@ -2,6 +2,8 @@ body {
     width: 375px;
     height: 812px;
     margin: 0 auto;
+    font-family: "Noto Sans KR";
+    font-style: normal;
 }
 
 p {
