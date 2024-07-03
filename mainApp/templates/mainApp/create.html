@@ -69,6 +69,7 @@
       action="{% url 'mainApp:create' %}"
       enctype="multipart/form-data"
     >
+    {% csrf_token %}
       <input
         class="title"
         type="text"

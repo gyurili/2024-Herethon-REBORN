@@ -1,124 +1,254 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/hyunh.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <title>메인 페이지</title>
 </head>
-<style>
-    .post-container {
-        display: flex;
-        align-items: center;
-    }
-    .post-image {
-        margin-right: 10px;
-    }
-    .post-details {
-        display: flex;
-        flex-direction: column;
-    }
-    .post-details h4, .post-details p {
-        margin: 0;
-    }
 
-    .dashboard {
-        display: flex;
-        flex-wrap: nowrap; /* 요소들을 한 줄에 나열하도록 설정합니다. */
-        justify-content: space-between; /* 요소들을 동일한 간격으로 배치합니다. */
-    }
-    .dashboard .container {
-        flex: 0 0 30%; /* 각 container의 너비를 설정합니다. */
-        padding: 10px; /* 각 container 사이의 간격을 조정합니다. */
-        border: 1px solid #ccc; /* 각 container에 테두리를 추가합니다. */
-    }
-</style>
 <body>
-    <h1> home </h1>
-    <a href="{% url 'mainApp:create' %}">글 작성</a><br>
+
+    <header class="community_header">
+        <div class="community_header_left"></div>
+        <a class="community_header_logo"><img src="../../../media/REBORN.png" alt="REBORN"></a>
+        <a href="#" class="community_header_notice"><img src="../../../media/noticeBell.png" alt="알림"></a>
+    </header>
+    <!-- <a href="{% url 'mainApp:create' %}">글 작성</a><br>
     <a href="{% url 'mainApp:challengeList' %}">챌린지 게시판</a><br>
-    <a href="{% url 'mainApp:tipList' %}">공유 게시판</a><br><br>
+    <a href="{% url 'mainApp:tipList' %}">공유 게시판</a><br><br> -->
+
+    <main class="community_main">
+        <!-- 검색 폼 -->
+        <form method="get" action="{% url 'mainApp:challengeList' %}" class="mainpg_main_search">
+            <input type="text" id="query" name="query" value="{{ request.GET.query }}"
+                class="community_main_search_input" placeholder="이번 달 챌린지 주제 ‘바지’를 검색해보세요!">
+        </form>
+
+        <div class="community_main_scroll">
+            <section class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="../../../media/mainBanner1.png" alt="배너1">
+                        <div class="swiper-content">
+                            <p class="swiper-content-title">이번 달 챌린지 주제 ‘바지’</p>
+                            <p class="swiper-content-text">나만의 리사이클링 방법을 공유해요!</p>
+                            <button class="swiper-content-btn">자랑하러 가기 <i
+                                    class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="../../../media/mainBanner2.png" alt="배너2">
+                        <div class="swiper-content">
+                            <p class="swiper-content-title">서울에서 즐기는 1:1 리폼 클래스</p>
+                            <p class="swiper-content-text">리폼에 소질이 없다면 클래스 참여는 어떨까요?</p>
+                            <button class="swiper-content-btn">정보 알아보기 <i
+                                    class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="../../../media/mainBanner3.png" alt="배너3">
+                        <div class="swiper-content">
+                            <p class="swiper-content-title">이번 달 챌린지 제휴 ‘숲스토리’</p>
+                            <p class="swiper-content-text">발달장애인 자립을 위한 리사이클링 샵 ‘숲스토리'를 소개합니다.</p>
+                            <button class="swiper-content-btn">자세히 보기 <i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </section>
+
+            <section class="mainpg_main_today">
+                <div class="mainpg_main_today_title">오늘의 인기 보드</div>
+                <div class="mainpg_main_today_content">
+                    <div class="mainpg_main_today_item">
+                        <p>오늘 내 챌린지 랭킹은?</p>
+                        <img src="../../../media/today1.png" alt="랭킹">
+                    </div>
+                    <div class="mainpg_main_today_item">
+                        <a href="{% url 'mainApp:challengeList' %}">
+                            <p>오늘의 챌린지 1위 글 보기</p>
+                            <img src="../../../media/today2.png" alt="랭킹">
+                        </a>
+                    </div>
+                    <div class="mainpg_main_today_item">
+                        <a href="{% url 'mainApp:create' %}">
+                            <p>나도 챌린지에 참여하기</p>
+                            <img src="../../../media/today3.png" alt="랭킹">
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mainpg_main_today_post">
+                <div class="mainpg_main_today_title">이번주 인기 글</div>
+                <div class="mainpg_main_today_post_item">
+                    {% if weekly_posts %}
+                    {% for post in weekly_posts %}
+                    <div class="mainpg_main_today_post_content">
+                        <div class="mainpg_main_today_post_content_i">
+                            <div class="post-rank">
+                                <span class="rank">{{ forloop.counter }}</span>
+                            </div>
+                            <div class="post-container">
+                                {% if post.image %}
+                                <div class="post-image">
+                                    <img width="80" height="60" src="{{ post.image.url }}">
+                                </div>
+                                {% endif %}
+                                <div class="post-details">
+                                    <p class="post-details-nickname"> {{ post.author.nickname }} </p>
+                                    <p class="post-details-posttitle"><a href="{% url 'mainApp:detail' post.id %}">
+                                            {{ post.title }}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-heart"><i class="fas fa-heart fa-lg"></i>{{ post.like.count }} </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="mainpg_main_today_short">
+                <div class="mainpg_main_today_title">#리폼숏폼</div>
+                <div class="mainpg_main_today_content">
+                    <div class="shortform_item">
+                        <div class="mainpg_main_today_item_short short1">
+                            <div style="width: 140px; height: 180px;"></div>
+                        </div>
+                        <div class="mainpg_main_today_item_short_title">#슬기로운리폼생활 죽은 옷 살리기 대작전</div>
+                    </div>
+                    <div class="shortform_item">
+                        <div class="mainpg_main_today_item_short short2">
+                            <div style="width: 140px; height: 180px;"></div>
+                        </div>
+                        <div class="mainpg_main_today_item_short_title">나이키 빅 쇼핑백 힙하게 바꾸기 #가방리폼</div>
+                    </div>
+                    <div class="shortform_item">
+                        <div class="mainpg_main_today_item_short short3">
+                            <div style="width: 140px; height: 180px;"></div>
+                        </div>
+                        <div class="mainpg_main_today_item_short_title">안 입는 셔츠 여름 원피스로 탈바꿈하기</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="mainpg_create_post">
+            <div class="mainpg_create_post">
+                <img src="../../../media/postToggleBtn.png" alt="더보기 버튼" id="post_toggleButton">
+            </div>
+        </div>
+        <div class="post_toggleContent" id="post_toggleContent">
+            <a href="{% url 'mainApp:create' %}">
+                <img src="../../../media/postBtn.png" alt="글 작성 버튼">
+            </a>
+        </div>
+        <div class="postMedia_toggleContent" id="postMedia_toggleContent">
+            <img src="../../../media/postMediaBtn.png" alt="미디어 버튼">
+        </div>
+    </main>
+
+
+    <footer class="community_footer">
+        <div class="community_footer_home">
+            <a href="{% url 'mainApp:main' %}">
+                <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            </a>
+            <p>홈</p>
+        </div>
+        <div class="community_footer_rank">
+            <a href="{% url 'mainApp:ranking' %}">
+                <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            </a>
+            <p>랭킹</p>
+        </div>
+        <div class="community_footer_community">
+            <a href="{% url 'mainApp:tipList' %}">
+                <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            </a>
+            <p>커뮤니티</p>
+        </div>
+        <div class="community_footer_my">
+            {% if not user.is_authenticated %}
+            <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            {% else %}
+            <a href="{% url 'accountApp:detail' pk=user.pk %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
+            {% endif %}
+            <p>MY</p>
+        </div>
+    </footer>
 
 
     <!--   로그인이 되어 있지 않으면   -->
     {% if not user.is_authenticated %}
-        <a href="{% url 'accountApp:login' %}?next={{ request.path }}" class="pragmatic_header_nav">
-            <span>login</span>
-        </a>
-        <a href="{% url 'accountApp:create' %}?next={{ request.path }}" class="pragmatic_header_nav">
-            <span>SignUp</span>
-        </a>
+    <a href="{% url 'accountApp:login' %}?next={{ request.path }}" class="pragmatic_header_nav">
+        <span>login</span>
+    </a>
+    <a href="{% url 'accountApp:create' %}?next={{ request.path }}" class="pragmatic_header_nav">
+        <span>SignUp</span>
+    </a>
     {% else %}
-        <form action="{% url 'accountApp:detail' pk=user.pk %}" class="pragmatic_header_nav">
-            <button type="submit">MyPage</button>
-        </form>
+    <form action="{% url 'accountApp:detail' pk=user.pk %}" class="pragmatic_header_nav">
+        <button type="submit">MyPage</button>
+    </form>
 
     <form action="{% url 'accountApp:logout' %}?next={{ request.path }}" method="post" class="pragmatic_header_nav">
         {% csrf_token %}
         <button type="submit">logout</button>
     </form>
-    <br><br>
+    {% endif %}
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                    hide: true,
+                },
+            });
+        });
+    </script>
 
-    {% endif %} <br>
+    <script>
+        document.getElementById('post_toggleButton').addEventListener('click', function () {
+            var content = document.getElementById('post_toggleContent');
+            var media = document.getElementById('postMedia_toggleContent');
+            content.classList.toggle('show');
+            media.classList.toggle('show');
 
-    <!-- 검색 폼 -->
-    <form method="get" action="{% url 'mainApp:challengeList' %}">
-        <label for="query">검색:</label>
-        <input type="text" id="query" name="query" value="{{ request.GET.query }}">
-        <button type="submit">검색</button>
-    </form><br><br>
-    
+            var toggleButton = document.getElementById('post_toggleButton');
 
-
-    <h2>오늘의 인기 보드</h2>
-    <div class="dashboard">
-        <div class="container">
-            <h3>오늘 내 챌린지 랭킹은? </h3>
-            {% if user_post_rank == 0 %}
-                <p>오늘 내 랭킹이 없습니다</p>
-            {% else %}
-                <p>{{ user_post_rank }}</p>
-            {% endif %}
-        </div>
-        <br><br>
-        <div class="container">
-            <h3>오늘의 1위 글 보기</h3>
-            {% if day_most_liked_post %}
-                <a href="{% url 'mainApp:detail' day_most_liked_post.pk %}?next={{ request.path }}">
-                    <span>{{ day_most_liked_post.title }}</span>
-                </a>
-            {% else %}
-                <p>아직 오늘의 1위글이 없습니다</p>
-            {% endif %}
-        </div>
-        <br><br>
-        <div class="container">
-            <h3>나도 챌린지에 참여하기</h3>
-            <a href="{% url 'mainApp:create' %}">참여하러 가기</a><br>
-        </div>
-    </div>
-    <br><br><br><br>
-
-    <div class="이번 주 인기글">
-        <h3>이번 주 인기글</h3>
-        {% if weekly_posts %}
-            {% for post in weekly_posts %}
-                <div class="post-container">
-                    {% if post.image %}
-                        <div class="post-image">
-                            <img width="80" height="60" src="{{ post.image.url }}">
-                        </div>
-                    {% endif %}
-                    <div class="post-details">
-                        <h4> {{ post.author.nickname }} </h4>
-                        <p><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
-                        <p> like count: {{ post.like.count }} </p>
-                        <p> comment count: {{ post.comment.count }} </p>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-        {% endif %}
-    </div>
-
+            // 토글 버튼 회전
+            if (toggleButton.classList.contains('rotated')) {
+                toggleButton.classList.remove('rotated');
+            } else {
+                toggleButton.classList.add('rotated');
+            }
+        });
+    </script>
 </body>
+
 </html>

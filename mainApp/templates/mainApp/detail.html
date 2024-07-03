@@ -1,63 +1,155 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/hyunh.css' %}">
     <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
-  </head>
-  <body>
-    {% if 1 in category_ids %}
-    <a href="{% url 'mainApp:challengeList' %}">뒤로가기</a>
-    {% elif 2 in category_ids %}
-    <a href="{% url 'mainApp:tipList' %}">뒤로가기</a>
-    {% endif %}<br /><br />
+</head>
 
-    <p>카테고리 - 
+<body>
+    <header class="community_header">
         {% for category in post.category.all %}
-            [{{ category.name }}]
-        {% endfor %}
-    </p>
-
-    {% if post.author.image %}
-    <img
-        width="50"
-        height="50"
-        src="{{ post.author.image.url }}"
-        alt="프로필 사진"
-    />
-    {% endif %}
-    <p>작성자 - {{ post.author.nickname }}</p>
-    <p>작성일 - {{ post.created_at }}</p>
-    <h2>제목 - {{ post.title }}</h2>
-    <p>내용 - {{ post.content }}</p>
-    <br />
-
-    {% if post.file %}
-    <a href="{{ post.file.url }}" download>{{ post.file.name }} 파일 다운</a>
-    {% endif %}<br /><br />
-
-    {% if post.image %}
-    <img width="320" height="240" src="{{ post.image.url }}" />
-    {% endif %}<br />
-
-    <p>하트 - {{ post.like.count }}
-        {% if request.user in post.like.all %}
-            <a href="{% url 'mainApp:remove_like' post.id %}">하트 취소</a>
+        {% if category.name == "공유 게시판" %}
+        <a href="{% url 'mainApp:tipList' %}"><img src="../../../media/backBtn.png" alt="뒤로가기"
+                class="community_header_back"></a>
         {% else %}
-            <a href="{% url 'mainApp:add_like' post.id %}">하트</a>
+        <a href="{% url 'mainApp:challengeList' %}"><img src="../../../media/backBtn.png" alt="뒤로가기"
+                class="community_header_back"></a>
         {% endif %}
-    </p>
-    <hr />
+        {% endfor %}
+        <span class="community_header_title">커뮤니티</span>
+        <a href="#" class="community_header_notice"><img src="../../../media/noticeBell.png" alt="알림"></a>
+    </header>
 
-    <!-- 내가 쓴 글만 삭제 -->
-    {% if request.user == post.author %}
-    <a href="{% url 'mainApp:update' post.id %}">수정하기</a><br />
-    <a href="{% url 'mainApp:delete' post.id %}">삭제하기</a>
-    {% endif %}<br>
+    <main class="community_main">
+        <section class="community_main_sec1">
+            {% for category in post.category.all %}
+            {% if category.name == "공유 게시판" %}
+            <div class="community_main_sec1_item focused" data-target="sec2">
+                <a href="{% url 'mainApp:tipList' %}">공유 게시판</a>
+            </div>
+            <div class="community_main_sec1_item" data-target="sec3">
+                <a href="{% url 'mainApp:challengeList' %}">챌린지 게시판</a>
+            </div>
+            {% else %}
+            <div class="community_main_sec1_item" data-target="sec2">
+                <a href="{% url 'mainApp:tipList' %}">공유 게시판</a>
+            </div>
+            <div class="community_main_sec1_item focused" data-target="sec3">
+                <a href="{% url 'mainApp:challengeList' %}">챌린지 게시판</a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </section>
 
-    <!-- 댓글 페이지로 이동 -->
-    <a href="{% url 'mainApp:view_comment' post.id %}">댓글 보기</a>
-    
+        <div class="community_main_scroll margin">
+            <section class="community_main_sec2">
+                <div class="community_main_sec2_post">
+                    <div class="community_main_sec3_post_header">
+                        <div class="community_main_sec3_post_user">
+                            <div class="community_main_sec3_post_userImg">
+                                {% if post.author.image %}
+                                <img width="30" height="30" src="{{ post.author.image.url }}" alt="프로필 사진">
+                                {% endif %}
+                            </div>
+                            <div class="community_main_sec3_post_nickDate">
+                                <p class="community_main_sec3_post_nick">{{ post.author.nickname }}</p>
+                                <p class="community_main_sec3_post_date">{{ post.created_at }}</p>
+                            </div>
+                        </div>
+                        <div class="community_main_sec2_post_list">
+                            <img src="../../../media/list.png" alt="리스트">
+                        </div>
+                    </div>
+
+                    <div class="community_main_sec4_post_title">{{ post.title }}</div>
+
+                    {% if post.file %}
+                    <a href="{{ post.file.url }}" download>{{ post.file.name }} 파일 다운</a>
+                    {% endif %}
+
+                    {% if post.image %}
+                    <img width="320" height="246" src="{{ post.image.url }}" class="community_main_sec4_post_img">
+                    {% endif %}
+
+                    <div class="community_main_sec4_post_text">{{ post.content }}</div>
+
+                    <!-- 내가 쓴 글만 삭제 -->
+                    {% if request.user == post.author %}
+                    <div class="community_main_sec4_post_toggle">
+                        <div><a href="{% url 'mainApp:update' post.id %}">수정</a></div>
+                        <div><a href="{% url 'mainApp:delete' post.id %}">삭제</a></div>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="community_main_sec4_post_likeCom">
+        <p>
+            {% if request.user in post.like.all %}
+            <a href="{% url 'mainApp:remove_like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
+            {% else %}
+            <a href="{% url 'mainApp:add_like' post.id %}"><i class="fa-regular fa-heart fa-lg"></i></a>
+            {% endif %}
+            {{ post.like.count }}
+        </p>
+        <p><a href="{% url 'mainApp:view_comment' post.id %}"><img src="../../../media/comment.png" alt="댓글"></a>{{ post.comments.count }}</p>
+    </div>
+
+    <footer class="community_footer">
+        <div class="community_footer_home">
+            <a href="{% url 'mainApp:main' %}">
+                <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            </a>
+            <p>홈</p>
+        </div>
+        <div class="community_footer_rank">
+            <a href="{% url 'mainApp:ranking' %}">
+                <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            </a>
+            <p>랭킹</p>
+        </div>
+        <div class="community_footer_community">
+            <a href="{% url 'mainApp:tipList' %}">
+                <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            </a>
+            <p>커뮤니티</p>
+        </div>
+        <div class="community_footer_my">
+            {% if not user.is_authenticated %}
+            <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            {% else %}
+            <a href="{% url 'accountApp:detail' pk=user.pk %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
+            {% endif %}
+            <p>MY</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const listElement = document.querySelector('.community_main_sec2_post_list');
+            const toggleElement = document.querySelector('.community_main_sec4_post_toggle');
+
+            listElement.addEventListener('click', function () {
+                if (toggleElement.style.display === 'none' || toggleElement.style.display === '') {
+                    toggleElement.style.display = 'block';
+                } else {
+                    toggleElement.style.display = 'none';
+                }
+            });
+            
+            toggleElement.style.display = 'none';
+        });
+    </script>
 </body>
+
+</html>
