@@ -1,115 +1,217 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
-  </head>
-  <body>
-    <div style="text-align: center; max-width: 500px; margin: 4rem auto">
-      <img
-        src="{{ target_user.image.url }}"
-        alt=""
-        style="
-          height: 8rem;
-          width: 8rem;
-          border-radius: 20rem;
-          margin-bottom: 2rem;
-        "
-      />
 
-      <h2>{{ target_user.nickname }}</h2>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="{% static 'css/hyunh.css' %}">
+  <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Title</title>
+</head>
 
-      {% if target_user == user %}
-      <!--  회원 설정 변경   -->
-      <a
-        class="material-icons"
-        style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem"
-        href="{% url 'accountApp:update' pk=user.pk %}"
-      >
-        settings
-      </a>
-      <!--  회원 탈퇴  -->
-      <a
-        class="material-icons"
-        style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem"
-        href="{% url 'accountApp:delete' pk=user.pk %}"
-      >
-        cancel
-      </a>
+<body>
 
-      {% endif %}
+  <header class="community_header">
+    <div class="community_header_left"></div>
+    <span class="community_header_title">MY</span>
+    <a href="#" class="community_header_notice"><img src="../../../media/noticeBell.png" alt="알림"></a>
+  </header>
 
-      <br /><br /><br /><br />
+  <main class="community_main">
+    <div>
+      <section class="my_sec1">
+        <div class="my_userall">
+          <img src="{{ target_user.image.url }}" alt="" />
+          <div class="my_user">
+            <div class="my_userinfo">
+              <p>{{ target_user.nickname }}</p>
+              <p>이메일</p>
+            </div>
+            <div class="my_userSet">
+              {% if target_user == user %}
+              <!--  회원 설정 변경   -->
+              <a class="material-icons my_userBtn" href="{% url 'accountApp:update' pk=user.pk %}">
+                회원 정보 수정
+              </a>
+              <!--  회원 탈퇴  -->
+              <a class="material-icons my_userBtn" href="{% url 'accountApp:delete' pk=user.pk %}">
+                회원 탈퇴
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <form action="{% url 'accountApp:logout' %}?next={{ request.path }}" method="post" class="pragmatic_header_nav">
+          {% csrf_token %}
+          <button type="submit" class="logout-button">로그아웃</button>
+        </form>
+      </section>
 
-      <!--  내가 쓴 글 목록  -->
-      <h1>내가 쓴 글</h1>
-      {% if post_list %}
-      <div class="post_container">
-        {% for post in post_list %}
-        <p>작성자 - {{ post.author.nickname }}</p>
-        {% if post.author.image %}
-        <img
-          width="50"
-          height="50"
-          src="{{ post.author.image.url }}"
-          alt="프로필 사진"
-        />
-        {% endif %}
-        <p>작성일 - {{ post.created_at }}</p>
-        <p>하트 수 - {{ post.like.count }}</p>
-        <p>댓글 수 - {{ post.comments.count }}</p>
-        {% if post.image %}
-        <img width="320" height="240" src="{{ post.image.url }}" />
-        {% endif %}
-        <h2>
-          <a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a>
-        </h2>
-        <p>
-          {% if post.content|length > 40 %} {{ post.content|slice:":40" }}... {%
-          else %} {{ post.content }} {% endif %}
-        </p>
-        <hr />
-        {% empty %} 작성된 글이 없습니다. {% endfor %}
-      </div>
-      {% else %}
-      <h2>작성한 글이 없습니다.</h2>
-      {% endif %}
+      <section class="my_sec2">
+        <!--  내가 쓴 글 목록  -->
+        <div class="my_post_category">
+          <div class="community_main_sec1_item focused" data-target="my_post_list">내가 쓴 글</div>
+          <div class="community_main_sec1_item" data-target="my_like_list">좋아요 한 글</div>
+        </div>
 
-      <br /><br /><br /><br />
+        <div class="community_main_scroll">
+        <div class="my_post_list">
+            {% if post_list %}
+            <div class="post_container">
+              {% for post in post_list %}
+              <div class="user_post_nameDate">
+                <p>{{ post.author.nickname }}</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
+                  <circle cx="1" cy="1" r="1" fill="rgba(0, 0, 0, 0.45);" fill-opacity="0.45" />
+                </svg>
+                <p>{{ post.created_at }}</p>
+              </div>
 
-      <!-- 내가 좋아요 누른 글 목록 -->
-      <h1>좋아요 누른 목록</h1>
-      {% if liked_post_list %}
-      <div class="liked_post_list">
-        {% for post in liked_post_list %}
-        <p>작성자 - {{ post.author.nickname }}</p>
-        {% if post.author.image %}
-        <img
-          width="50"
-          height="50"
-          src="{{ post.author.image.url }}"
-          alt="프로필 사진"
-        />
-        {% endif %}
-        <p>작성일 - {{ post.created_at }}</p>
-        <p>하트 수 - {{ post.like.count }}</p>
-        <p>댓글 수 - {{ post.comments.count }}</p>
-        {% if post.image %}
-        <img width="320" height="240" src="{{ post.image.url }}" />
-        {% endif %}
-        <h2>
-          <a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a>
-        </h2>
-        <p>
-          {% if post.content|length > 40 %} {{ post.content|slice:":40" }}... {%
-          else %} {{ post.content }} {% endif %}
-        </p>
-        <hr />
-        {% empty %} 작성된 글이 없습니다. {% endfor %}
-      </div>
-      {% else %}
-      <h2>좋아요를 누른 글이 없습니다.</h2>
-      {% endif %}
+              <div class="user_post_titleLike">
+                <div>
+                  <a href="{% url 'mainApp:detail' post.id %}" class="user_post_titleLike_title">{{ post.title }}</a>
+                </div>
+                <div class="community_main_sec3_post_likeCom">
+                  <p>
+                    {% if request.user in post.like.all %}
+                    <a href="{% url 'mainApp:remove_like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
+                    {% else %}
+                    <a href="{% url 'mainApp:add_like' post.id %}"><i class="fa-regular fa-heart fa-lg"></i></a>
+                    {% endif %}
+                    {{ post.like.count }}
+                  </p>
+                  <p><img src="../../../media/comment.png" alt="댓글">{{ post.comments.count }}</p>
+                </div>
+              </div>
+
+              <div class="user_post_textImg">
+                <p>
+                  {% if post.content|length > 40 %}
+                  {{ post.content|slice:":40" }}...
+                  {% else %}
+                  {{ post.content }}
+                  {% endif %}
+                </p>
+                {% if post.image %}
+                <img width="110" height="55" src="{{ post.image.url }}" class="user_post_textImg_img" />
+                {% endif %}
+              </div>
+
+              {% empty %} 작성된 글이 없습니다. {% endfor %}
+            </div>
+            {% else %}
+            <div class="post_none">작성한 글이 없습니다.</div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- 내가 좋아요 누른 글 목록 -->
+
+        <div class="community_main_scroll">
+        <div class="my_like_list" style="display: none;">
+            {% if liked_post_list %}
+            <div class="post_container">
+              {% for post in liked_post_list %}
+              <div class="user_post_nameDate">
+                <p>{{ post.author.nickname }}</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
+                  <circle cx="1" cy="1" r="1" fill="rgba(0, 0, 0, 0.45);" fill-opacity="0.45" />
+                </svg>
+                <p>{{ post.created_at }}</p>
+              </div>
+
+              <div class="user_post_titleLike">
+                <div>
+                  <a href="{% url 'mainApp:detail' post.id %}" class="user_post_titleLike_title">{{ post.title }}</a>
+                </div>
+                <div class="community_main_sec3_post_likeCom">
+                  <p>
+                    {% if request.user in post.like.all %}
+                    <a href="{% url 'mainApp:remove_like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
+                    {% else %}
+                    <a href="{% url 'mainApp:add_like' post.id %}"><i class="fa-regular fa-heart fa-lg"></i></a>
+                    {% endif %}
+                    {{ post.like.count }}
+                  </p>
+                  <p><img src="../../../media/comment.png" alt="댓글">{{ post.comments.count }}</p>
+                </div>
+              </div>
+
+              <div class="user_post_textImg">
+                <p>
+                  {% if post.content|length > 40 %}
+                  {{ post.content|slice:":40" }}...
+                  {% else %}
+                  {{ post.content }}
+                  {% endif %}
+                </p>
+                {% if post.image %}
+                <img width="110" height="55" src="{{ post.image.url }}" class="user_post_textImg_img" />
+                {% endif %}
+              </div>
+              {% empty %} 작성된 글이 없습니다. {% endfor %}
+            </div>
+            {% else %}
+            <div class="post_none">좋아요를 누른 글이 없습니다.</div>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+
     </div>
-  </body>
+  </main>
+
+  <footer class="community_footer">
+    <div class="community_footer_home">
+      <a href="{% url 'mainApp:main' %}">
+        <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+      </a>
+      <p>홈</p>
+    </div>
+    <div class="community_footer_rank">
+      <a href="{% url 'mainApp:ranking' %}">
+        <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+      </a>
+      <p>랭킹</p>
+    </div>
+    <div class="community_footer_community">
+      <a href="{% url 'mainApp:tipList' %}">
+        <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+      </a>
+      <p>커뮤니티</p>
+    </div>
+    <div class="community_footer_my">
+      {% if not user.is_authenticated %}
+      <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+      {% else %}
+      <a href="{% url 'accountApp:detail' pk=user.pk %}">
+        <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+      </a>
+      {% endif %}
+      <p>MY</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const categoryItems = document.querySelectorAll('.community_main_sec1_item');
+      const postLists = document.querySelectorAll('.my_post_list, .my_like_list');
+
+      categoryItems.forEach(item => {
+        item.addEventListener('click', function () {
+          categoryItems.forEach(el => el.classList.remove('focused'));
+          this.classList.add('focused');
+
+          const target = this.getAttribute('data-target');
+
+          postLists.forEach(list => list.style.display = 'none');
+
+          document.querySelector(`.${target}`).style.display = 'block';
+        });
+      });
+    });
+  </script>
+</body>
+
 </html>

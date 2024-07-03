@@ -19,7 +19,7 @@
 
     <main class="community_main">
         <section class="community_main_sec1">
-            <div class="community_main_sec1_item focused focused" data-target="sec2"><a href="{% url 'mainApp:tipList' %}">공유
+            <div class="community_main_sec1_item focused" data-target="sec2"><a href="{% url 'mainApp:tipList' %}">공유
                     게시판</a></div>
             <div class="community_main_sec1_item" data-target="sec3"><a href="{% url 'mainApp:challengeList' %}">챌린지
                     게시판</a></div>
@@ -64,9 +64,9 @@
                         <div class="community_main_sec3_post_likeCom">
                             <p>
                                 {% if request.user in post.like.all %}
-                                <a href="{% url 'mainApp:remove-like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
+                                <a href="{% url 'mainApp:remove_like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
                                 {% else %}
-                                <a href="{% url 'mainApp:add-like' post.id %}"><i
+                                <a href="{% url 'mainApp:add_like' post.id %}"><i
                                         class="fa-regular fa-heart fa-lg"></i></a>
                                 {% endif %}
                                 {{ post.like.count }}
@@ -95,19 +95,31 @@
 
     <footer class="community_footer">
         <div class="community_footer_home">
-            <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            <a href="{% url 'mainApp:main' %}">
+                <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            </a>
             <p>홈</p>
         </div>
         <div class="community_footer_rank">
-            <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            <a href="{% url 'mainApp:ranking' %}">
+                <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            </a>
             <p>랭킹</p>
         </div>
         <div class="community_footer_community">
-            <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            <a href="{% url 'mainApp:tipList' %}">
+                <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            </a>
             <p>커뮤니티</p>
         </div>
         <div class="community_footer_my">
+            {% if not user.is_authenticated %}
             <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            {% else %}
+            <a href="{% url 'accountApp:detail' pk=user.pk %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
+            {% endif %}
             <p>MY</p>
         </div>
     </footer>

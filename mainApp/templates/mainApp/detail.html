@@ -86,25 +86,6 @@
                         <div><a href="{% url 'mainApp:delete' post.id %}">삭제</a></div>
                     </div>
                     {% endif %}
-
-                    <!--댓글-->
-                    <form method="POST" action="{% url 'mainApp:create-comment' post.id %}">
-                        {% csrf_token %}
-                        댓글 - <input type="text" name="content"><input type="submit" value="작성">
-                    </form>
-
-                    <p>댓글 수 : {{ post.comments.count }}</p>
-                    {% for comment in post.comments.all %}
-                    작성자 - {{ comment.author.nickname }}<br>
-                    <b>{{ comment.content }}</b><br>
-                    작성일 - {{ comment.created_at }}<br>
-                    {% if request.user == comment.author %}
-                    <a href="{% url 'mainApp:delete-comment' comment.id %}">삭제하기</a>
-                    {% endif %}<br><br>
-                    {% empty %}
-                    댓글이 없습니다
-                    {% endfor %}
-                    <br>
                 </div>
             </section>
         </div>
@@ -113,9 +94,9 @@
     <div class="community_main_sec4_post_likeCom">
         <p>
             {% if request.user in post.like.all %}
-            <a href="{% url 'mainApp:remove-like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
+            <a href="{% url 'mainApp:remove_like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
             {% else %}
-            <a href="{% url 'mainApp:add-like' post.id %}"><i class="fa-regular fa-heart fa-lg"></i></a>
+            <a href="{% url 'mainApp:add_like' post.id %}"><i class="fa-regular fa-heart fa-lg"></i></a>
             {% endif %}
             {{ post.like.count }}
         </p>
@@ -124,19 +105,31 @@
 
     <footer class="community_footer">
         <div class="community_footer_home">
-            <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            <a href="{% url 'mainApp:main' %}">
+                <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            </a>
             <p>홈</p>
         </div>
         <div class="community_footer_rank">
-            <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            <a href="{% url 'mainApp:ranking' %}">
+                <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            </a>
             <p>랭킹</p>
         </div>
         <div class="community_footer_community">
-            <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            <a href="{% url 'mainApp:tipList' %}">
+                <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            </a>
             <p>커뮤니티</p>
         </div>
         <div class="community_footer_my">
+            {% if not user.is_authenticated %}
             <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            {% else %}
+            <a href="{% url 'accountApp:detail' pk=user.pk %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
+            {% endif %}
             <p>MY</p>
         </div>
     </footer>

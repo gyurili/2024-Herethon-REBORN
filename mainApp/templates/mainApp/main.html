@@ -9,24 +9,6 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <title>메인 페이지</title>
 </head>
-<style>
-    .dashboard {
-        display: flex;
-        flex-wrap: nowrap;
-        /* 요소들을 한 줄에 나열하도록 설정합니다. */
-        justify-content: space-between;
-        /* 요소들을 동일한 간격으로 배치합니다. */
-    }
-
-    .dashboard .container {
-        flex: 0 0 30%;
-        /* 각 container의 너비를 설정합니다. */
-        padding: 10px;
-        /* 각 container 사이의 간격을 조정합니다. */
-        border: 1px solid #ccc;
-        /* 각 container에 테두리를 추가합니다. */
-    }
-</style>
 
 <body>
 
@@ -164,7 +146,9 @@
             </div>
         </div>
         <div class="post_toggleContent" id="post_toggleContent">
-            <img src="../../../media/postBtn.png" alt="글 작성 버튼">
+            <a href="{% url 'mainApp:create' %}">
+                <img src="../../../media/postBtn.png" alt="글 작성 버튼">
+            </a>
         </div>
         <div class="postMedia_toggleContent" id="postMedia_toggleContent">
             <img src="../../../media/postMediaBtn.png" alt="미디어 버튼">
@@ -174,19 +158,31 @@
 
     <footer class="community_footer">
         <div class="community_footer_home">
-            <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            <a href="{% url 'mainApp:main' %}">
+                <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            </a>
             <p>홈</p>
         </div>
         <div class="community_footer_rank">
-            <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            <a href="{% url 'mainApp:ranking' %}">
+                <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            </a>
             <p>랭킹</p>
         </div>
         <div class="community_footer_community">
-            <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            <a href="{% url 'mainApp:tipList' %}">
+                <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            </a>
             <p>커뮤니티</p>
         </div>
         <div class="community_footer_my">
+            {% if not user.is_authenticated %}
             <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            {% else %}
+            <a href="{% url 'accountApp:detail' pk=user.pk %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
+            {% endif %}
             <p>MY</p>
         </div>
     </footer>
@@ -209,39 +205,7 @@
         {% csrf_token %}
         <button type="submit">logout</button>
     </form>
-    <br><br>
-
-
-    {% endif %} <br>
-
-    <h2>오늘의 인기 보드</h2>
-    <div class="dashboard">
-        <div class="container">
-            <h3>오늘 내 챌린지 랭킹은? </h3>
-            {% if user_post_rank == 0 %}
-            <p>오늘 내 랭킹이 없습니다</p>
-            {% else %}
-            <p>{{ user_post_rank }}</p>
-            {% endif %}
-        </div>
-        <br><br>
-        <div class="container">
-            <h3>오늘의 1위 글 보기</h3>
-            {% if day_most_liked_post %}
-            <a href="{% url 'mainApp:detail' day_most_liked_post.pk %}?next={{ request.path }}">
-                <span>{{ day_most_liked_post.title }}</span>
-            </a>
-            {% else %}
-            <p>아직 오늘의 1위글이 없습니다</p>
-            {% endif %}
-        </div>
-        <br><br>
-        <div class="container">
-            <h3>나도 챌린지에 참여하기</h3>
-            <a href="{% url 'mainApp:create' %}">참여하러 가기</a><br>
-        </div>
-    </div>
-    <br><br><br><br>
+    {% endif %}
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
