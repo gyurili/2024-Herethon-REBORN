@@ -1,56 +1,116 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/hyunh.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>공유 게시판</title>
 </head>
+
 <body>
-    <h3>공유 게시판</h3>
-    <a href="{% url 'mainApp:main' %}">뒤로가기</a>
-    <hr>
+    <header class="community_header">
+        <a href="{% url 'mainApp:main' %}"><img src="../../../media/backBtn.png" alt="뒤로가기" class="community_header_back"></a>
+        <span class="community_header_title">커뮤니티</span>
+        <a href="#" class="community_header_notice"><img src="../../../media/noticeBell.png" alt="알림"></a>
+    </header>
 
-    <!-- 검색 폼 -->
-    <form method="get" action="{% url 'mainApp:challengeList' %}">
-        <label for="query">검색:</label>
-        <input type="text" id="query" name="query" value="{{ request.GET.query }}">
-        <button type="submit">검색</button>
-    </form>
-    <hr>
+    <main class="community_main">
+        <section class="community_main_sec1">
+            <div class="community_main_sec1_item focused focused" data-target="sec2"><a href="{% url 'mainApp:tipList' %}">공유
+                    게시판</a></div>
+            <div class="community_main_sec1_item" data-target="sec3"><a href="{% url 'mainApp:challengeList' %}">챌린지
+                    게시판</a></div>
+        </section>
 
-    <!-- 정렬 기준 -->
-    <form method="get" id="sortForm">
-        <label for="sort">정렬 기준:</label>
-        <select name="sort" id="sort" onchange="document.getElementById('sortForm').submit()">
-            <option value="latest" {% if sort == 'latest' %}selected{% endif %}>최신순</option>
-            <option value="likes" {% if sort == 'likes' %}selected{% endif %}>하트가 많은 순서</option>
-        </select>
-    </form>
-    <hr><br>
+        <!-- 검색 폼 -->
+        <form method="get" action="{% url 'mainApp:challengeList' %}" class="community_main_search">
+            <input type="text" id="query" name="query" value="{{ request.GET.query }}"
+                class="community_main_search_input" placeholder="이번 달 챌린지 주제 ‘바지’를 검색해보세요!">
+        </form>
 
-    <!-- 카테고리 2번 글 목록 -->
-    {% for post in posts %}
-        <p>작성자 - {{ post.author.nickname }}</p>
-        {% if post.author.image %}
-                <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
-        {% endif %}
-        <p>작성일 - {{ post.created_at }}</p>
-        <p>하트 수 - {{ post.like.count }}</p>
-        <p>댓글 수 - {{ post.comments.count }}</p>
-        {% if post.image %}
-            <img width="320" height="240" src="{{ post.image.url }}">
-        {% endif %}
-        <h2><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></h2>
-        <p>
-            {% if post.content|length > 40 %}
-                {{ post.content|slice:":40" }}...
-            {% else %}
-                {{ post.content }}
-            {% endif %}
-        </p>
-        <hr>
-    {% empty %}
-        작성된 글이 없습니다.
-    {% endfor %}
+        <!-- 정렬 기준 -->
+        <form method="get" id="sortForm" class="community_main_sort">
+            <select name="sort" id="sort" onchange="document.getElementById('sortForm').submit()"
+                class="community_main_sort_selec">
+                <option value="latest" {% if latest_selected %}selected{% endif %} class="community_main_sort_opt">
+                    최신순
+                </option>
+                <option value="likes" {% if likes_selected %}selected{% endif %} class="community_main_sort_opt">하트
+                    많은 순
+                </option>
+            </select>
+        </form>
+
+        <div class="community_main_scroll">
+            <section class="community_main_sec3">
+                <!-- 챌린지 게시판 글 목록 -->
+                {% for post in posts %}
+                <div class="community_main_sec3_post">
+                    <div class="community_main_sec3_post_header">
+                        <div class="community_main_sec3_post_user">
+                            <div class="community_main_sec3_post_userImg">
+                                {% if post.author.image %}
+                                <img width="30" height="30" src="{{ post.author.image.url }}" alt="프로필 사진">
+                                {% endif %}
+                            </div>
+                            <div class="community_main_sec3_post_nickDate">
+                                <p class="community_main_sec3_post_nick">{{ post.author.nickname }}</p>
+                                <p class="community_main_sec3_post_date">{{ post.created_at }}</p>
+                            </div>
+                        </div>
+                        <div class="community_main_sec3_post_likeCom">
+                            <p>
+                                {% if request.user in post.like.all %}
+                                <a href="{% url 'mainApp:remove-like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
+                                {% else %}
+                                <a href="{% url 'mainApp:add-like' post.id %}"><i
+                                        class="fa-regular fa-heart fa-lg"></i></a>
+                                {% endif %}
+                                {{ post.like.count }}
+                            </p>
+                            <p><img src="../../../media/comment.png" alt="댓글">{{ post.comments.count }}</p>
+                        </div>
+                    </div>
+                    {% if post.image %}
+                    <img width="320" height="240" src="{{ post.image.url }}" class="community_main_sec3_post_img">
+                    {% endif %}
+                    <p class="community_main_sec3_post_title"><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
+                    <p class="community_main_sec3_post_text">
+                        {% if post.content|length > 40 %}
+                        {{ post.content|slice:":40" }}...
+                        {% else %}
+                        {{ post.content }}
+                        {% endif %}
+                    </p>
+                </div>
+                {% empty %}
+                작성된 글이 없습니다.
+                {% endfor %}
+            </section>
+        </div>
+    </main>
+
+    <footer class="community_footer">
+        <div class="community_footer_home">
+            <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+            <p>홈</p>
+        </div>
+        <div class="community_footer_rank">
+            <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+            <p>랭킹</p>
+        </div>
+        <div class="community_footer_community">
+            <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+            <p>커뮤니티</p>
+        </div>
+        <div class="community_footer_my">
+            <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            <p>MY</p>
+        </div>
+    </footer>
 </body>
+
 </html>

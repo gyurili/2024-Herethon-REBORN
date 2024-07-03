@@ -60,7 +60,8 @@ def challengeList(request):
     else:
         posts = posts.order_by('-id')
 
-    return render(request, 'mainApp/challengeList.html', {'posts': posts, 'categories': categories, 'sort': sort, 'query': query})
+    return render(request, 'mainApp/challengeList.html', {'posts': posts, 'categories': categories, 'sort': sort, 'query': query, 'latest_selected': sort == 'latest',
+        'likes_selected': sort == 'likes'})
 
 #팁 게시판 리스트
 def tipList(request):
