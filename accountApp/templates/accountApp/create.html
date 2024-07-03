@@ -100,7 +100,7 @@
         <img
           class="basicProfile"
           id="profile-image"
-          src="{% static 'img/profile.png' %}"
+          src="{% static 'img/profile.png' %}">
           <!--
           기본
           이미지
@@ -124,7 +124,7 @@
               />
             </svg>
             <span>File</span>
-            <!-- 선택 버튼에 텍스트 추가 -->
+            <-- 선택 버튼에 텍스트 추가 -->
           </label>
           <input
             type="file"
@@ -135,6 +135,14 @@
           />
 
           {{ form.nickname }}
+          <button type="button" id="check-nickname-btn" class="btn btn-primary">
+            <img
+              class="check"
+              src="{%static 'img\중복확인.png' %}"
+              alt="Show Password"
+            />
+          </button>
+          <div id="nickname-check-result"></div>
         </div>
         <style>
           #id_image {
@@ -173,6 +181,24 @@
             },
           });
         });
+
+        $('#check-nickname-btn').click(function() {
+                var nickname = $('#id_nickname').val();
+                $.ajax({
+                    url: "{% url 'accountApp:check_nickname' %}",
+                    data: {
+                        'nickname': nickname
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.is_taken) {
+                            $('#nickname-check-result').html('<p style="color: red;">이미 사용중인 닉네임입니다.</p>');
+                        } else {
+                            $('#nickname-check-result').html('<p style="color: green;">사용 가능한 닉네임입니다.</p>');
+                        }
+                    }
+                });
+            });
 
         $("#toggle-password1-btn").click(function () {
           var passwordField = $("#id_password1");
@@ -216,6 +242,8 @@
               "{% static 'img/profile.png' %}"; // 선택하지 않았을 때 기본 이미지로 설정
           }
         });
+
+
     </script>
   </body>
 </html>

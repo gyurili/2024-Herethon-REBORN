@@ -43,6 +43,34 @@ def main(request):
     return render(request, "mainApp/main.html", {'object_list': users, 'day_most_liked_post':day_most_liked_post,
                                                 'weekly_posts':weekly_posts, 'user_post_rank':user_post_rank, 'query': query})
 
+
+
+# 랭킹
+def ranking(request):
+    users = User.objects.all()
+    # 오늘 날짜
+    today = date.today()
+    start_of_month = today.replace(day=1)
+
+    # 이번달 게시글
+    monthly_posts = Post.objects.filter(created_at__date__gte=start_of_month) \
+                        .annotate(like_count=models.Count('like')) \
+                        .order_by('-like_count', '-id')
+
+    user_posts_count = Post.objects.filter(author=request.user.id).count()
+    # 사용자가 이번 달에 작성한 게시글 수 계산
+    user_posts_monthly_count = monthly_posts.filter(author=request.user.id).count()
+
+    # 사용자 게시글 순위
+    user_post = monthly_posts.filter(author=request.user.id).first()
+    user_post_rank = list(monthly_posts).index(user_post) + 1 if user_post else 0
+
+    return render(request, "mainApp/ranking.html", {'object_list': users, 'user_posts_count': user_posts_count, 'user_posts_monthly_count':user_posts_monthly_count,
+                                                 'user_post':user_post, 'monthly_posts': monthly_posts, 'user_post_rank': user_post_rank})
+
+
+
+
 # 챌린지 게시판 리스트
 def challengeList(request):
     categories = Category.objects.all()

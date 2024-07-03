@@ -11,6 +11,7 @@ urlpatterns = [
     path('detail/<int:id>/', detail, name='detail'),
     path('update/<int:id>/', update, name='update'),
     path('delete/<int:id>/', delete, name='delete'),
+    path('ranking', ranking, name='ranking'),
     
     # 댓글 
     path('detail/<int:post_id>/comments/', view_comment, name='view_comment'),
