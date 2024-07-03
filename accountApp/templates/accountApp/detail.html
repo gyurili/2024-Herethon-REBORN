@@ -71,6 +71,13 @@
               <div class="user_post_titleLike">
                 <div>
                   <a href="{% url 'mainApp:detail' post.id %}" class="user_post_titleLike_title">{{ post.title }}</a>
+                  {% for category in post.category.all %}
+                    {% if category.name == "챌린지" %}
+                      챌린지
+                    {% else %}
+                      공유
+                    {% endif %}
+                  {% endfor %}
                 </div>
                 <div class="community_main_sec3_post_likeCom">
                   <p>
@@ -124,6 +131,13 @@
               <div class="user_post_titleLike">
                 <div>
                   <a href="{% url 'mainApp:detail' post.id %}" class="user_post_titleLike_title">{{ post.title }}</a>
+                  {% for category in post.category.all %}
+                    {% if category.name == "챌린지" %}
+                      챌린지
+                    {% else %}
+                      공유
+                    {% endif %}
+                  {% endfor %}
                 </div>
                 <div class="community_main_sec3_post_likeCom">
                   <p>
