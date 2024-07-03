@@ -1,0 +1,175 @@
+body {
+  width: 375px;
+  height: 812px;
+  margin: 0 auto;
+  background-color: rgb(198, 198, 198);
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  background-color: #66ff91;
+  height: 50px;
+  align-items: center;
+}
+.back {
+  margin-left: 14px;
+}
+
+h4 {
+  margin-left: 115px;
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.bottom {
+  padding-left: 38px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(0, 0, 0);
+}
+
+.logo {
+  margin-top: 38px;
+  margin-left: 116px;
+  width: 67.813px;
+  height: 92.856px;
+  padding: 0;
+}
+
+.id {
+  color: #fff;
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0px;
+  margin-top: 38px;
+  margin-bottom: 15px;
+}
+
+h5 {
+  color: #fff;
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0px;
+  margin-top: 51px;
+  margin-bottom: 15px;
+}
+
+button {
+  border: none;
+  padding: 0px;
+  background-color: rgb(0, 0, 0);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.check {
+  width: 80px;
+  height: 25px;
+  flex-shrink: 0;
+  margin-top: -5px;
+  margin-bottom: -7px;
+}
+
+.password-icon {
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+
+.form-group {
+  padding-top: 0px;
+  margin-bottom: 0px;
+}
+
+.form-group .profile {
+  display: flex;
+  flex-direction: row;
+}
+
+::placeholder {
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 215px;
+  height: 25px;
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  display: inline-block;
+  padding-left: 17px;
+}
+
+input[name="nickname"] {
+  width: 135px;
+  height: 25px;
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  display: inline-block;
+  margin-left: -20px;
+}
+
+p {
+  margin-top: 7px;
+  margin-bottom: 0px;
+  color: var(--test_gr, #66ff91);
+  font-family: "Noto Sans KR";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  position: absolute;
+}
+
+input[type="submit"].btn.btn-dark.rounded-pill.col-6.mt-3 {
+  border: none;
+  width: 300px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: #66ff91;
+
+  color: var(--00, #000);
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  margin-bottom: 42px;
+}
+
+.basicProfile {
+  width: 59px;
+  height: 59px;
+  flex-shrink: 0;
+  border-radius: 100%;
+}
+
+.profile {
+  margin-left: 47px;
+  margin-top: -30px;
+}

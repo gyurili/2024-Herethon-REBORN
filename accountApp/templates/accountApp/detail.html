@@ -1,104 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
-<div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+  </head>
+  <body>
+    <div style="text-align: center; max-width: 500px; margin: 4rem auto">
+      <img
+        src="{{ target_user.image.url }}"
+        alt=""
+        style="
+          height: 8rem;
+          width: 8rem;
+          border-radius: 20rem;
+          margin-bottom: 2rem;
+        "
+      />
 
-    <img src="{{ target_user.image.url }}" alt=""
-         style="height: 8rem; width: 8rem; border-radius:20rem; margin-bottom: 2rem">
+      <h2>{{ target_user.nickname }}</h2>
 
-    <h2>
-        {{ target_user.nickname }}
-    </h2>
-
-
-    {% if target_user == user %}
-<!--  회원 설정 변경   -->
-    <a class="material-icons"
-       style="box-shadow: 0 0 4px #ccc; border-radius:10rem; padding: .4rem ;"
-       href="{% url 'accountApp:update' pk=user.pk %}">
+      {% if target_user == user %}
+      <!--  회원 설정 변경   -->
+      <a
+        class="material-icons"
+        style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem"
+        href="{% url 'accountApp:update' pk=user.pk %}"
+      >
         settings
-    </a>
-<!--  회원 탈퇴  -->
-    <a class="material-icons"
-       style="box-shadow: 0 0 4px #ccc; border-radius:10rem; padding: .4rem ;"
-       href="{% url 'accountApp:delete' pk=user.pk %}">
+      </a>
+      <!--  회원 탈퇴  -->
+      <a
+        class="material-icons"
+        style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem"
+        href="{% url 'accountApp:delete' pk=user.pk %}"
+      >
         cancel
-    </a>
+      </a>
 
-    {% endif %}
+      {% endif %}
 
-<br><br><br><br>
+      <br /><br /><br /><br />
 
-<!--  내가 쓴 글 목록  -->
-    <h1>내가 쓴 글</h1>
-    {% if post_list %}
-        <div class="post_container" >
+      <!--  내가 쓴 글 목록  -->
+      <h1>내가 쓴 글</h1>
+      {% if post_list %}
+      <div class="post_container">
         {% for post in post_list %}
-            <p>작성자 - {{ post.author.nickname }}</p>
-            {% if post.author.image %}
-                    <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
-            {% endif %}
-            <p>작성일 - {{ post.created_at }}</p>
-            <p>하트 수 - {{ post.like.count }}</p>
-            <p>댓글 수 - {{ post.comments.count }}</p>
-            {% if post.image %}
-                <img width="320" height="240" src="{{ post.image.url }}">
-            {% endif %}
-            <h2><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></h2>
-            <p>
-                {% if post.content|length > 40 %}
-                    {{ post.content|slice:":40" }}...
-                {% else %}
-                    {{ post.content }}
-                {% endif %}
-            </p>
-            <hr>
-        {% empty %}
-            작성된 글이 없습니다.
-        {% endfor %}
-        </div>
-    {% else %}
-    <h2>작성한 글이 없습니다.</h2>
-    {% endif %}
+        <p>작성자 - {{ post.author.nickname }}</p>
+        {% if post.author.image %}
+        <img
+          width="50"
+          height="50"
+          src="{{ post.author.image.url }}"
+          alt="프로필 사진"
+        />
+        {% endif %}
+        <p>작성일 - {{ post.created_at }}</p>
+        <p>하트 수 - {{ post.like.count }}</p>
+        <p>댓글 수 - {{ post.comments.count }}</p>
+        {% if post.image %}
+        <img width="320" height="240" src="{{ post.image.url }}" />
+        {% endif %}
+        <h2>
+          <a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a>
+        </h2>
+        <p>
+          {% if post.content|length > 40 %} {{ post.content|slice:":40" }}... {%
+          else %} {{ post.content }} {% endif %}
+        </p>
+        <hr />
+        {% empty %} 작성된 글이 없습니다. {% endfor %}
+      </div>
+      {% else %}
+      <h2>작성한 글이 없습니다.</h2>
+      {% endif %}
 
-<br><br><br><br>
+      <br /><br /><br /><br />
 
-<!-- 내가 좋아요 누른 글 목록 -->
-    <h1>좋아요 누른 목록</h1>
-    {% if liked_post_list %}
-        <div class="liked_post_list">
+      <!-- 내가 좋아요 누른 글 목록 -->
+      <h1>좋아요 누른 목록</h1>
+      {% if liked_post_list %}
+      <div class="liked_post_list">
         {% for post in liked_post_list %}
-            <p>작성자 - {{ post.author.nickname }}</p>
-            {% if post.author.image %}
-                    <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
-            {% endif %}
-            <p>작성일 - {{ post.created_at }}</p>
-            <p>하트 수 - {{ post.like.count }}</p>
-            <p>댓글 수 - {{ post.comments.count }}</p>
-            {% if post.image %}
-                <img width="320" height="240" src="{{ post.image.url }}">
-            {% endif %}
-            <h2><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></h2>
-            <p>
-                {% if post.content|length > 40 %}
-                    {{ post.content|slice:":40" }}...
-                {% else %}
-                    {{ post.content }}
-                {% endif %}
-            </p>
-            <hr>
-        {% empty %}
-            작성된 글이 없습니다.
-        {% endfor %}
-        </div>
-    {% else %}
-        <h2>좋아요를 누른 글이 없습니다.</h2>
-    {% endif %}
-</div>
-
-</body>
+        <p>작성자 - {{ post.author.nickname }}</p>
+        {% if post.author.image %}
+        <img
+          width="50"
+          height="50"
+          src="{{ post.author.image.url }}"
+          alt="프로필 사진"
+        />
+        {% endif %}
+        <p>작성일 - {{ post.created_at }}</p>
+        <p>하트 수 - {{ post.like.count }}</p>
+        <p>댓글 수 - {{ post.comments.count }}</p>
+        {% if post.image %}
+        <img width="320" height="240" src="{{ post.image.url }}" />
+        {% endif %}
+        <h2>
+          <a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a>
+        </h2>
+        <p>
+          {% if post.content|length > 40 %} {{ post.content|slice:":40" }}... {%
+          else %} {{ post.content }} {% endif %}
+        </p>
+        <hr />
+        {% empty %} 작성된 글이 없습니다. {% endfor %}
+      </div>
+      {% else %}
+      <h2>좋아요를 누른 글이 없습니다.</h2>
+      {% endif %}
+    </div>
+  </body>
 </html>

@@ -1,87 +1,221 @@
 <!DOCTYPE html>
-{% load bootstrap4 %}
+{% load static %} {% load bootstrap4 %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'css/sign.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<style>
-        .form-group {
-            margin-bottom: 20px;
-        }
-    </style>
-<body>
-    <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
-        <div class="mb-4">
-            <h4>Sign Up</h4>
-        </div>
-        <form action="{% url 'accountApp:create' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-                <h5>아이디</h5>
-                {{ form.email }}
-                <button type="button" id="check-email-btn" class="btn btn-primary">Check Email</button>
-                <div id="email-check-result"></div>
-            </div>
-            <div class="form-group">
-                <h5>비밀번호</h5>
-                {{ form.password1 }}
-                <button type="button" id="toggle-password1-btn" class="btn btn-secondary">Show Password</button>
-            </div>
-            <div class="form-group">
-                <h5>비밀번호 재확인</h5>
-                {{ form.password2 }}
-                <button type="button" id="toggle-password2-btn" class="btn btn-secondary">Show Password</button>
-            </div>
-            <div class="form-group">
-                <h5>프로필 설정</h5>
-                {{ form.image }}
-                {{ form.nickname }}
-            </div>
-            <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
-        </form>
+  </head>
+  <style>
+    .form-group {
+      margin-bottom: 20px;
+    }
+  </style>
+  <body>
+    <header>
+      <!-- 뒤로가기 버튼 -->
+      <a href="{% url 'accountApp:login' %}"
+        ><svg
+          class="back"
+          width="25"
+          height="26"
+          viewBox="0 0 25 26"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M5 13C5 12.6598 5.15691 12.3387 5.42503 12.1303L16.2307 3.73069C16.7096 3.35841 17.3988 3.446 17.77 3.92633C18.1412 4.40666 18.0538 5.09784 17.5749 5.47012L7.88808 13L17.5749 20.5299C18.0538 20.9022 18.1412 21.5933 17.77 22.0737C17.3988 22.554 16.7096 22.6416 16.2307 22.2693L5.42503 13.8697C5.15691 13.6613 5 13.3402 5 13Z"
+            fill="black"
+          />
+        </svg>
+      </a>
+      <div class="mb-4">
+        <h4>회원가입</h4>
+      </div>
+    </header>
 
-    </div>
+    <form
+      class="bottom"
+      action="{% url 'accountApp:create' %}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <img class="logo" src="{%static 'img\logo.png' %}" alt="logo" />
+      <div class="form-group">
+        <div class="id">아이디</div>
+        {{ form.email }}
+        <button type="button" id="check-email-btn" class="btn btn-primary">
+          <img
+            class="check"
+            src="{%static 'img\중복확인.png' %}"
+            alt="Show Password"
+          />
+        </button>
+        <div id="email-check-result"></div>
+      </div>
+
+      <div class="form-group">
+        <h5>비밀번호</h5>
+        {{ form.password1 }}
+        <button
+          type="button"
+          id="toggle-password1-btn"
+          class="btn btn-secondary"
+        >
+          <img
+            class="password-icon"
+            src="{%static 'img\눈뜬아이콘.png' %}"
+            alt="Show Password"
+          />
+        </button>
+      </div>
+      <div class="form-group">
+        <h5>비밀번호 재확인</h5>
+        {{ form.password2 }}
+        <button
+          type="button"
+          id="toggle-password2-btn"
+          class="btn btn-secondary"
+        >
+          <img
+            class="password-icon"
+            src="{%static 'img\눈뜬아이콘.png' %}"
+            alt="Show Password"
+          />
+        </button>
+      </div>
+
+      <div class="form-group">
+        <h5>프로필 설정</h5>
+        <img
+          class="basicProfile"
+          id="profile-image"
+          src="{% static 'img/profile.png' %}"
+          <!--
+          기본
+          이미지
+          경로
+          설정
+          --
+        />
+        <div class="profile">
+          <label for="id_image" class="file-label">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <circle cx="8" cy="8" r="8" fill="#66FF91" />
+              <path
+                d="M12 7.55556H8.44444V4H7.55556V7.55556H4V8.44444H7.55556V12H8.44444V8.44444H12V7.55556Z"
+                fill="black"
+              />
+            </svg>
+            <span>File</span>
+            <!-- 선택 버튼에 텍스트 추가 -->
+          </label>
+          <input
+            type="file"
+            name="image"
+            id="id_image"
+            accept="image/*"
+            style="display: none"
+          />
+
+          {{ form.nickname }}
+        </div>
+        <style>
+          #id_image {
+            width: 120px; /* 원하는 가로 길이 설정 */
+          }
+        </style>
+      </div>
+
+      <input
+        type="submit"
+        class="btn btn-dark rounded-pill col-6 mt-3"
+        value="가입하기"
+      />
+    </form>
 
     <script>
-        $(document).ready(function() {
-            $('#check-email-btn').click(function() {
-                var email = $('#id_email').val();
-                $.ajax({
-                    url: "{% url 'accountApp:check_email' %}",
-                    data: {
-                        'email': email
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.is_taken) {
-                            $('#email-check-result').html('<p style="color: red;">Email is already taken.</p>');
-                        } else {
-                            $('#email-check-result').html('<p style="color: green;">Email is available.</p>');
-                        }
-                    }
-                });
-            });
-
-            $('#toggle-password1-btn').click(function() {
-                var passwordField = $('#id_password1');
-                var type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-                passwordField.attr('type', type);
-                var btnText = type === 'password' ? 'Show Password' : 'Hide Password';
-                $(this).text(btnText);
-            });
-
-            $('#toggle-password2-btn').click(function() {
-                var passwordField = $('#id_password2');
-                var type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-                passwordField.attr('type', type);
-                var btnText = type === 'password' ? 'Show Password' : 'Hide Password';
-                $(this).text(btnText);
-            });
+      $(document).ready(function () {
+        $("#check-email-btn").click(function () {
+          var email = $("#id_email").val();
+          $.ajax({
+            url: "{% url 'accountApp:check_email' %}",
+            data: {
+              email: email,
+            },
+            dataType: "json",
+            success: function (data) {
+              if (data.is_taken) {
+                $("#email-check-result").html(
+                  '<p style="color: red;">이미 사용 중인 이메일입니다.</p>'
+                );
+              } else {
+                $("#email-check-result").html(
+                  '<p cstyle="color: green;">사용 가능한 이메일입니다.</p>'
+                );
+              }
+            },
+          });
         });
 
+        $("#toggle-password1-btn").click(function () {
+          var passwordField = $("#id_password1");
+          var type =
+            passwordField.attr("type") === "password" ? "text" : "password";
+          passwordField.attr("type", type);
+          var imgSrc =
+            type === "password"
+              ? "{%static 'img\눈뜬아이콘.png' %}"
+              : "{%static 'img\눈감은아이콘.png' %}";
+          $(this).find(".password-icon").attr("src", imgSrc);
+        });
 
+        $("#toggle-password2-btn").click(function () {
+          var passwordField = $("#id_password2");
+          var type =
+            passwordField.attr("type") === "password" ? "text" : "password";
+          passwordField.attr("type", type);
+          var imgSrc =
+            type === "password"
+              ? "{%static 'img\눈뜬아이콘.png' %}"
+              : "{%static 'img\눈감은아이콘.png' %}";
+          $(this).find(".password-icon").attr("src", imgSrc);
+        });
+      });
     </script>
-</body>
+
+    <script>
+      document
+        .getElementById("id_image")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.getElementById("profile-image").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          } else {
+            document.getElementById("profile-image").src =
+              "{% static 'img/profile.png' %}"; // 선택하지 않았을 때 기본 이미지로 설정
+          }
+        });
+    </script>
+  </body>
 </html>

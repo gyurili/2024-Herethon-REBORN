@@ -1,38 +1,46 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     {% if 1 in category_ids %}
-        <a href="{% url 'mainApp:challengeList' %}">뒤로가기</a>
+    <a href="{% url 'mainApp:challengeList' %}">뒤로가기</a>
     {% elif 2 in category_ids %}
-        <a href="{% url 'mainApp:tipList' %}">뒤로가기</a>
-    {% endif %}<br><br>
+    <a href="{% url 'mainApp:tipList' %}">뒤로가기</a>
+    {% endif %}<br /><br />
 
     <p>카테고리 - 
         {% for category in post.category.all %}
             [{{ category.name }}]
         {% endfor %}
     </p>
-    
+
     {% if post.author.image %}
-        <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
+    <img
+        width="50"
+        height="50"
+        src="{{ post.author.image.url }}"
+        alt="프로필 사진"
+    />
     {% endif %}
     <p>작성자 - {{ post.author.nickname }}</p>
     <p>작성일 - {{ post.created_at }}</p>
     <h2>제목 - {{ post.title }}</h2>
-    <p>내용 - {{ post.content }}</p><br>
-    
+    <p>내용 - {{ post.content }}</p>
+    <br />
+
     {% if post.file %}
-        <a href="{{ post.file.url }}" download>{{ post.file.name }} 파일 다운</a>
-    {% endif %}<br><br>
+    <a href="{{ post.file.url }}" download>{{ post.file.name }} 파일 다운</a>
+    {% endif %}<br /><br />
 
     {% if post.image %}
-        <img width="320" height="240" src="{{ post.image.url }}">
-    {% endif %}<br>
+    <img width="320" height="240" src="{{ post.image.url }}" />
+    {% endif %}<br />
 
     <p>하트 - {{ post.like.count }}
         {% if request.user in post.like.all %}
@@ -41,17 +49,15 @@
             <a href="{% url 'mainApp:add_like' post.id %}">하트</a>
         {% endif %}
     </p>
+    <hr />
 
     <!-- 내가 쓴 글만 삭제 -->
     {% if request.user == post.author %}
-    <a href="{% url 'mainApp:update' post.id %}">수정하기</a><br>
+    <a href="{% url 'mainApp:update' post.id %}">수정하기</a><br />
     <a href="{% url 'mainApp:delete' post.id %}">삭제하기</a>
-    {% endif %}
-    
-    <hr><br>
+    {% endif %}<br>
 
     <!-- 댓글 페이지로 이동 -->
     <a href="{% url 'mainApp:view_comment' post.id %}">댓글 보기</a>
     
 </body>
-</html>
