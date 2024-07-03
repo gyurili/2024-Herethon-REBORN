@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments</title>
+</head>
+<body>
+    <a href="{% url 'mainApp:detail' post.id %}">뒤로가기</a><br><br>
+
+    <!-- 댓글 작성 -->
+    <form method="POST" action="{% url 'mainApp:create_comment' post.id %}">
+        {% csrf_token %}
+        댓글 - <input type="text" name="content"><input type="submit" value="작성">
+    </form>
+
+    <p>댓글 수 : {{ post.comments.count }}</p>
+    {% for comment in post.comments.all %}
+        {% if comment.author.image %}
+            <img width="30" height="30" src="{{ comment.author.image.url }}" alt="프로필 사진"><br>
+        {% endif %}
+        작성자 - {{ comment.author.nickname }}<br>
+        <b>{{ comment.content }}</b><br>
+        작성일 - {{ comment.created_at }}<br>
+        {% if request.user == comment.author %}
+            <a href="{% url 'mainApp:delete_comment' comment.id %}">삭제하기</a>
+        {% endif %}<br><br>
+    {% empty %}
+        댓글이 없습니다
+    {% endfor %}
+    <br>
+</body>
+</html>

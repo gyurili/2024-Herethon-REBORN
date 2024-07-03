@@ -12,7 +12,6 @@
         <a href="{% url 'mainApp:tipList' %}">뒤로가기</a>
     {% endif %}<br><br>
 
-
     <p>카테고리 - 
         {% for category in post.category.all %}
             [{{ category.name }}]
@@ -20,7 +19,7 @@
     </p>
     
     {% if post.author.image %}
-                <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
+        <img width="50" height="50" src="{{ post.author.image.url }}" alt="프로필 사진">
     {% endif %}
     <p>작성자 - {{ post.author.nickname }}</p>
     <p>작성일 - {{ post.created_at }}</p>
@@ -35,13 +34,11 @@
         <img width="320" height="240" src="{{ post.image.url }}">
     {% endif %}<br>
 
-    
-
     <p>하트 - {{ post.like.count }}
         {% if request.user in post.like.all %}
-            <a href="{% url 'mainApp:remove-like' post.id %}">하트 취소</a>
+            <a href="{% url 'mainApp:remove_like' post.id %}">하트 취소</a>
         {% else %}
-            <a href="{% url 'mainApp:add-like' post.id %}">하트</a>
+            <a href="{% url 'mainApp:add_like' post.id %}">하트</a>
         {% endif %}
     </p>
 
@@ -53,24 +50,8 @@
     
     <hr><br>
 
-    <!--댓글-->
-    <form method="POST" action="{% url 'mainApp:create-comment' post.id %}">
-        {% csrf_token %}
-        댓글 - <input type="text" name="content"><input type="submit" value="작성">
-    </form>
-
-    <p>댓글 수 : {{ post.comments.count }}</p>
-    {% for comment in post.comments.all %}
-        작성자 - {{ comment.author.nickname }}<br>
-        <b>{{ comment.content }}</b><br>
-        작성일 - {{ comment.created_at }}<br>
-        {% if request.user == comment.author %}
-            <a href="{% url 'mainApp:delete-comment' comment.id %}">삭제하기</a>
-        {% endif %}<br><br>
-    {% empty %}
-        댓글이 없습니다
-    {% endfor %}
-    <br>
+    <!-- 댓글 페이지로 이동 -->
+    <a href="{% url 'mainApp:view_comment' post.id %}">댓글 보기</a>
     
 </body>
 </html>

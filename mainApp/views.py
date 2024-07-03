@@ -125,6 +125,7 @@ def detail(request, id):
     return render(request, 'mainApp/detail.html', {'post': post, 'category_ids': category_ids})
 
 # 글 수정
+@login_required
 def update(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == "POST":
@@ -145,17 +146,34 @@ def update(request, id):
     return render(request, 'mainApp/update.html', {'post': post})
 
 # 글 삭제
+@login_required
 def delete(request, id):
     post = get_object_or_404(Post, id=id)
-    categories = post.category.all()
+    categories = list(post.category.all())  # 리스트로 변환
+
     post.delete()
 
-    if any(category.id == 1 for category in categories):
+    # 카테고리가 존재하고, 그 중에 ID가 1인 카테고리가 있는지 확인
+    if categories and any(category.id == 1 for category in categories):
         return redirect('mainApp:challengeList')
     else:
         return redirect('mainApp:tipList')
 
+
+# 댓글창 조회
+def view_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == "POST":
+        Comment.objects.create(
+            content=request.POST.get('content'),
+            author=request.user,
+            post=post
+        )
+        return redirect('mainApp:view_comment', post_id)
+    return render(request, 'mainApp/comment.html', {'post': post})
+
 # 댓글 작성
+@login_required
 def create_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == "POST":
@@ -164,24 +182,25 @@ def create_comment(request, post_id):
             author=request.user,
             post=post
         )
-        return redirect('mainApp:detail', post_id)
+        return redirect('mainApp:view_comment', post_id)
 
 # 댓글 삭제
+@login_required
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     if request.user == comment.author:
         comment.delete()
-        return redirect('mainApp:detail', id=comment.post.id)
-    else:
-        return redirect('mainApp:detail', id=comment.post.id)
+    return redirect('mainApp:view_comment', post_id=comment.post.id)
 
 # 하트 누르기
+@login_required
 def add_like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.like.add(request.user)
     return redirect('mainApp:detail', post_id)
 
 # 하트 취소
+@login_required
 def remove_like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.like.remove(request.user)
