@@ -106,11 +106,9 @@ def tipList(request):
     if sort == 'likes':
         posts = posts.annotate(like_count=models.Count('like')).order_by('-like_count', '-id')
     else:
-        posts = posts.order_by('-id')
+        posts = posts.order_by('-created_at')
 
-    return render(request, 'mainApp/tipList.html', {'posts': posts, 'categories': categories, 'sort': sort, 'query': query})
-
-
+    return render(request, 'mainApp/tipList.html', {'posts': posts, 'categories': categories, 'sort': sort, 'query': query, 'latest_selected': sort == 'latest', 'likes_selected': sort == 'likes'})
 
 # 글 작성
 @login_required
