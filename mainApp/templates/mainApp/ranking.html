@@ -175,6 +175,8 @@
                 <p><a href="{% url 'mainApp:detail' user_post.id %}">{{ user_post.title }}</a>
                 <p> like count: {{ user_post.like.count }} </p>
                 <p> comment count: {{ user_post.comment.count }} </p>
+            {% else %}
+                <p>사용자 정보 없음:로그인되지않아 확인 불가</p>
             {% endif %}
         </div>
         </div>
