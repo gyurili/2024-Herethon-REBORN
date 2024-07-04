@@ -29,7 +29,7 @@ class AccountCreateView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         print("Form is valid")
-        messages.success(self.request, '회원가입이 완료되었습니다. 로그인 해주세요.')
+        messages.success(self.request, '가입이 완료되었습니다! 이제 로그인 해볼까요?')
         return response
 
     def form_invalid(self, form):

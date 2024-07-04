@@ -99,3 +99,12 @@ form {
   flex-direction: column;
   align-items: center;
 }
+
+.box p {
+  color: var(--test_gr, #66FF91);
+font-family: "Noto Sans KR";
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}

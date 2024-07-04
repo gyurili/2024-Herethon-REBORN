@@ -155,6 +155,7 @@ a {
 .community_main_sec2,
 .community_main_sec3 {
     height: 100%;
+    background-color: white;
 }
 
 .community_main_sec2_post,
@@ -310,18 +311,27 @@ a {
 }
 
 .community_main_sec4_post_title {
-    font-size: 20px;
-    font-weight: bold;
     margin-top: 20px;
     padding-bottom: 10px;
     text-align: center;
     border-bottom: 0.5px solid rgb(0, 0, 0, 0.25);
+    color: #000;
+    font-family: "Noto Sans KR";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .community_main_sec4_post_text {
-    font-size: 14px;
     margin-top: 25px;
     margin-bottom: 25px;
+    color: #000;
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .community_main_sec4_post_likeCom {
