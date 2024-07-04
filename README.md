@@ -14,16 +14,33 @@
 
   <span>기획·디자인: </span> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
 
-- **팀원 소개**<br/>
-| 이름 | 소속 |
-| --- | --- |
-| 정성윤(개발자, FE) | 충남대학교 인공지능학과 | 
-| 정원준(개발자, FE) | 남서울대학교 컴퓨터소프트웨어학과 | 
-| 윤윤지(개발자, FE) | 덕성여자대학교 컴퓨터공학과 |  
-| 박규리(개발자, BE) | 덕성여자대학교 컴퓨터공학과 | 
-| 이예나(개발자, BE) | 숙명여자대학교 IT공학전공 |
-| 이예령(개발자, BE) | 성신여자대학교 소프트웨어전공 |
-| 임영우(기획 및 디자인) | 충남대학교 행정학부 |
+- **팀원 소개**
+  <table border="" cellspacing="0" cellpadding="0" width="100%">
+  <tr width="100%">
+  <td align="center">윤수진</a></td>
+  <td align="center">김채연</a></td>
+  <td  align="center">노현희</a></td>
+<td  align="center">박규리</a></td>
+<td  align="center">서영은</a></td>
+  </tr>
+  <tr width="100%">
+  
+  </tr>
+  <tr width="100%">
+  <td  align="center">기획·디자인</td>
+  <td  align="center">프론트엔드</td>
+  <td  align="center">프론트엔드</td>
+  <td  align="center">백엔드</td>
+  <td  align="center">백엔드</td>
+     </tr>
+      <tr width="100%">
+        <td  align="center">동덕여자대학교<br />커뮤니케이션콘텐츠전공</td>
+        <td  align="center">이화여자대학교<br />사이버보안학과</td>
+        <td  align="center">성신여자대학교<br />수학과</td>
+        <td  align="center">덕성여자대학교<br />컴퓨터공학과</td>
+        <td  align="center">서울여자대학교<br />소프트웨어융합학과</td>
+     </tr>
+  </table>
 
 - **폴더 구조**
 
