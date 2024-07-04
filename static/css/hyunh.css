@@ -736,6 +736,7 @@ a {
 
 .my_user {
     padding-left: 15px;
+    padding-top: 15px;
 }
 
 .my_userinfo {
@@ -754,7 +755,7 @@ a {
     color: #66FF91;
     font-size: 12px;
     font-weight: 600;
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .logout-button:focus {
@@ -763,13 +764,18 @@ a {
 
 .my_userBtn {
     cursor: pointer;
-    color: #66FF91;
+    color: #000;
     font-size: 12px;
     font-weight: 600;
-}
-
-.my_userBtn:not(:last-child) {
-    padding-right: 15px;
+    width: 90px;
+    height: 25px;
+    background-color: #66FF91;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 155px;
 }
 
 .my_sec2 {
@@ -847,10 +853,17 @@ a {
     display: flex;
 }
 
+.user_post_titleLike_category {
+    display: flex;
+    align-items: center;
+    padding-left: 6px;
+}
+
 .user_post_titleLike_category span {
     font-size: 8px;
     color: #66FF91;
     font-weight: 600;
+    padding-left: 4px;
 }
 
 /* 알림 */

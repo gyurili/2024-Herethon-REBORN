@@ -19,11 +19,37 @@
         <!-- 뒤로가기 버튼 -->
         {% for category in post.category.all %}
         {% if category.name == "챌린지" %}
-        <a href="{% url 'mainApp:challengeList' %}"><img src="../../../media/backBtn.png" alt="뒤로가기"
-            class="community_header_back"></a>
+        <a href="{% url 'mainApp:challengeList' %}"><svg
+            class="back"
+            width="25"
+            height="26"
+            viewBox="0 0 25 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M5 13C5 12.6598 5.15691 12.3387 5.42503 12.1303L16.2307 3.73069C16.7096 3.35841 17.3988 3.446 17.77 3.92633C18.1412 4.40666 18.0538 5.09784 17.5749 5.47012L7.88808 13L17.5749 20.5299C18.0538 20.9022 18.1412 21.5933 17.77 22.0737C17.3988 22.554 16.7096 22.6416 16.2307 22.2693L5.42503 13.8697C5.15691 13.6613 5 13.3402 5 13Z"
+              fill="black"
+            />
+          </svg></a>
         {% else %}
-        <a href="{% url 'mainApp:tipList' %}"><img src="../../../media/backBtn.png" alt="뒤로가기"
-            class="community_header_back"></a>
+        <a href="{% url 'mainApp:tipList' %}"><svg
+            class="back"
+            width="25"
+            height="26"
+            viewBox="0 0 25 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M5 13C5 12.6598 5.15691 12.3387 5.42503 12.1303L16.2307 3.73069C16.7096 3.35841 17.3988 3.446 17.77 3.92633C18.1412 4.40666 18.0538 5.09784 17.5749 5.47012L7.88808 13L17.5749 20.5299C18.0538 20.9022 18.1412 21.5933 17.77 22.0737C17.3988 22.554 16.7096 22.6416 16.2307 22.2693L5.42503 13.8697C5.15691 13.6613 5 13.3402 5 13Z"
+              fill="black"
+            />
+          </svg></a>
         {% endif %}
         {% endfor %}
   
@@ -72,7 +98,11 @@
   
         <!-- 내용 -->
         <div class="content">
-          <textarea name="content">{{ post.content }}</textarea>
+          <textarea name="content">{{ post.content }}
+          </textarea>
+          {% if post.image %}
+            <img width="320" height="240" src="{{ post.image.url }}" class="community_main_sec4_post_img">
+          {% endif %}
         </div>
   
         <div class="fileUpload">
@@ -139,9 +169,6 @@
               </svg>
             </div>
           </label>
-          {% if post.image %}
-            <img width="320" height="240" src="{{ post.image.url }}" class="community_main_sec4_post_img">
-          {% endif %}
           <input type="file" name="image" id="file">
           <!-- 파일 업로드 -->
           <label for="file">
