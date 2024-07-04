@@ -106,11 +106,9 @@ def tipList(request):
     if sort == 'likes':
         posts = posts.annotate(like_count=models.Count('like')).order_by('-like_count', '-id')
     else:
-        posts = posts.order_by('-id')
+        posts = posts.order_by('-created_at')
 
-    return render(request, 'mainApp/tipList.html', {'posts': posts, 'categories': categories, 'sort': sort, 'query': query})
-
-
+    return render(request, 'mainApp/tipList.html', {'posts': posts, 'categories': categories, 'sort': sort, 'query': query, 'latest_selected': sort == 'latest', 'likes_selected': sort == 'likes'})
 
 # 글 작성
 @login_required
@@ -157,6 +155,8 @@ def detail(request, id):
 @login_required
 def update(request, id):
     post = get_object_or_404(Post, id=id)
+    categories = Category.objects.all()
+
     if request.method == "POST":
         post.title = request.POST.get('title')
         post.content = request.POST.get('content')
@@ -170,9 +170,17 @@ def update(request, id):
             post.file.delete()
             post.file = file
 
+        category_ids = request.POST.getlist('category')
+        post.category.clear()
+        for category_id in category_ids:
+            category = get_object_or_404(Category, id=category_id)
+            post.category.add(category)
+
         post.save()
         return redirect('mainApp:detail', id)
-    return render(request, 'mainApp/update.html', {'post': post})
+    
+    return render(request, 'mainApp/update.html', {'post': post, 'categories': categories})
+
 
 # 글 삭제
 @login_required
