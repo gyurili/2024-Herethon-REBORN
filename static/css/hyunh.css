@@ -80,6 +80,7 @@ a {
     width: 150px;
     line-height: 50px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .community_main_sec1_item.focused {
@@ -463,7 +464,7 @@ a {
 
 /* 메인 - 인기 보드 */
 .mainpg_main_today {
-    height: 230px;
+    /* height: 230px; */
     padding: 30px 20px 20px 20px;
 }
 
@@ -799,6 +800,11 @@ a {
 .my_like_list {
     display: grid;
     justify-content: center;
+}
+
+.community_my_scroll {
+    height: 570px;
+    overflow-y: auto;
 }
 
 .post_container {

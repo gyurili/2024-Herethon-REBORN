@@ -177,6 +177,7 @@
                 <div class="post-details-details">
                 <h4> {{ user_post.author.nickname }} </h4>
                 <p><a href="{% url 'mainApp:detail' user_post.id %}">{{ user_post.title }}</a>
+<<<<<<< HEAD
                 </div>
                 </div>
                 <div class="heart">
@@ -188,6 +189,12 @@
                       <p>{{ user_post.like.count }} </p>
                     </div> 
                 
+=======
+                <p> like count: {{ user_post.like.count }} </p>
+                <p> comment count: {{ user_post.comment.count }} </p>
+            {% else %}
+                <p>사용자 정보 없음:로그인되지않아 확인 불가</p>
+>>>>>>> a3a387ca2e51982c66c12682877deb23dcbba2fd
             {% endif %}
         </div>
         </div>

@@ -174,7 +174,9 @@
         </div>
         <div class="community_footer_my">
             {% if not user.is_authenticated %}
-            <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            <a href="{% url 'accountApp:login' %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
             {% else %}
             <a href="{% url 'accountApp:detail' pk=user.pk %}">
                 <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
