@@ -1,0 +1,444 @@
+body {
+    width: 375px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: white;
+}
+
+header {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    background-color: #66ff91;
+    width: 375px;
+    height: 50px;
+    align-items: center;
+    z-index: 2;
+}
+
+.back {
+    margin-left: 14px;
+}
+
+h2 {
+    margin-left: 121px;
+    margin-right: 121px;
+    color: var(--00, #000);
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.bottom {
+    padding-top: 60px;
+    padding-left: 19px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    height: 1839px;
+}
+
+div h2 {
+    color: #ffffff;
+    font-family: "Noto Sans KR";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin: 0px;
+    margin-left: 77px;
+}
+
+.crown {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    margin-top: 17px;
+    margin-left: 153px;
+}
+
+.coupon {
+    width: 43.942px;
+    height: 30.422px;
+    transform: rotate(-30deg);
+    flex-shrink: 0;
+    margin-left: 142px;
+    margin-bottom: 21.25px;
+}
+
+.explain .ex1 {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Noto Sans KR";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin-left: 7px;
+    margin-right: 26px;
+}
+
+.explain .ex2 {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Noto Sans KR";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 29px;
+    margin-right: 48px;
+    margin-top: 11px;
+}
+
+.explain .ex3 {
+    color: var(--test_gr, #66FF91);
+    text-align: center;
+    font-family: "Noto Sans KR";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 29px;
+    margin-right: 48px;
+    margin-top: 11.43px;
+}
+
+h3 {
+    color: var(--ff, #ffffff);
+    font-family: "Noto Sans KR";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 70px;
+}
+
+.post-container2 {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Add this CSS to hide elements with the class extra initially */
+.post-container.extra {
+    display: none;
+}
+
+.topRank {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    margin-left: 50px;
+}
+
+.nickimg .post-image img {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    border: 3px solid var(--ff, #FFF);
+    background: url(<path-to-image>) lightgray 50% / cover no-repeat, #D9D9D9;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: white;
+}
+
+.second .post-container,
+.first .post-container,
+.third .post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.secondGraph {
+    width: 79px;
+    height: 77px;
+    flex-shrink: 0;
+    margin-top: -21px;
+    z-index: 0;
+}
+
+.firstGraph {
+    width: 79px;
+    height: 120px;
+    flex-shrink: 0;
+    margin-top: -20px;
+    z-index: 0;
+}
+
+.thirdGraph {
+    width: 79px;
+    height: 52px;
+    flex-shrink: 0;
+    margin-top: -20px;
+    z-index: 0;
+}
+
+h4 {
+    color: var(--ff, #FFF);
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 0;
+}
+
+.first .nickimg,
+.second .nickimg,
+.third .nickimg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.second .nickimg {
+    margin-top: 44px;
+}
+
+.third .nickimg {
+    margin-top: 68px;
+}
+
+.topRank .post-details {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.post-details .like {
+    width: 20px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+.post-details p {
+    color: var(--ff, #FFF);
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: -2px;
+    margin-left: 6px;
+    margin-bottom: 70px;
+}
+
+.allRanks .post-container,
+.allRanks .post-container.extra {
+    display: flex;
+    flex-direction: row;
+    width: 337px;
+    height: 66px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background-image: url('../img/전체랭킹배경2.png');
+    background-size: cover;
+    margin-top: 20px;
+    position: relative;
+}
+
+.allRanks .post-container.rank-1,
+.allRanks .post-container.rank-2,
+.allRanks .post-container.rank-3 {
+    background-image: url('../img/전체랭킹배경.png');
+}
+
+.allRanks .post-container .post-details,
+.allRanks .post-container.extra .post-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-details-details,
+.post-details-details.extra {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.allRanks .post-container .number,
+.allRanks .post-container.extra .number {
+    color: var(--gray, rgba(29, 29, 29, 0.85));
+    font-family: "Noto Sans KR";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin-left: 26px;
+    margin-right: 18px;
+    margin-top: 17px;
+}
+
+.allRanks .post-container .post-image img,
+.allRanks .post-container.extra .post-image img {
+    width: 50px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+    margin-top: 13px;
+    margin-right: 10px;
+}
+
+.allRanks .post-container h4,
+.allRanks .post-container.extra h4 {
+    color: #000;
+    font-family: "Noto Sans KR";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 0px;
+    margin-top: 18px;
+}
+
+.allRanks .post-container .post-details a,
+.allRanks .post-container.extra .post-details a {
+    color: #000;
+    font-family: "Noto Sans KR";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+    margin-left: -6px;
+}
+
+.allRanks .post-container .heart,
+.allRanks .post-container.extra .heart {
+    display: flex;
+    flex-direction: row;
+    margin-top: 35px;
+    position: absolute;
+    right: 12px;
+    top: 70%;
+    transform: translateY(-50%);
+}
+
+.allRankHeart,
+.allRanks .post-container.extra .allRankHeart {
+    width: 14px;
+    height: 11.667px;
+    flex-shrink: 0;
+}
+
+.allRanks .post-container .heart p,
+.allRanks .post-container.extra .heart p {
+    color: #000;
+    font-family: "Noto Sans KR";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#show-more-btn {
+    display: flex;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 156px;
+    margin-top: 18.5px;
+}
+
+#show-more-btn img {
+    width: 50px; /* 적절한 너비를 설정하세요 */
+    height: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.container h3 {
+    color: var(--ff, #FFF);
+font-family: "Noto Sans KR";
+font-size: 22px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.myRank {
+    width: 337px;
+height: 66px;
+flex-shrink: 0;
+border-radius: 15px;
+background: var(--ff, #FFF);
+display: flex;
+flex-direction: row;
+}
+
+.myRank .post-image img {
+    width: 50px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+    margin-top: 13px;
+    margin-right: 10px;
+}
+
+.mycontainer{
+
+}
+.thismonth,
+.total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 21px;
+    align-items: center;
+    margin-top: -15px;
+}
+
+.thismonth p {
+    color: var(--ff, #FFF);
+font-family: "Noto Sans KR";
+font-size: 22px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.thismonth div {
+    color: var(--test_gr, #66FF91);
+    font-family: "Noto Sans KR";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.total {
+    display: flex;
+    flex-direction: row;
+}
+
+.total p {
+    color: var(--ff, #FFF);
+font-family: "Noto Sans KR";
+font-size: 22px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.total div {
+    color: var(--test_gr, #66FF91);
+    font-family: "Noto Sans KR";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+
