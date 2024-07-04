@@ -34,11 +34,11 @@
   <td  align="center">백엔드</td>
      </tr>
       <tr width="100%">
-        <td  align="center"><p>동덕여자대학교</p><p>동덕여자대학교</p></td>
-        <td  align="center"><p>이화여자대학교</p><p>사이버보안학과</p></td>
-        <td  align="center"><p>성신여자대학교</p><p>수학과</p></td>
-        <td  align="center"><p>덕성여자대학교</p><p>컴퓨터공학과</p></td>
-        <td  align="center"><p>서울여자대학교</p><p>소프트웨어융합학과</p></td>
+        <td  align="center">동덕여자대학교</br>커뮤니케이션콘텐츠전공</td>
+        <td  align="center">이화여자대학교</br>사이버보안학과</td>
+        <td  align="center">성신여자대학교</br>수학과</td>
+        <td  align="center">덕성여자대학교</br>컴퓨터공학과</td>
+        <td  align="center">서울여자대학교</br>소프트웨어융합학과</td>
      </tr>
   </table>
 
