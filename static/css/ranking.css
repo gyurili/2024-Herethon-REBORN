@@ -6,14 +6,51 @@ body {
 }
 
 header {
-    position: fixed;
     display: flex;
-    flex-direction: row;
-    background-color: #66ff91;
-    width: 375px;
-    height: 50px;
+    justify-content: space-between;
     align-items: center;
+    background-color: #66FF91;
+    padding: 0 10px;
+    height: 50px;
+    
     z-index: 2;
+}
+
+.community_header_left {
+    width: 25px;
+    height: 26px;
+}
+
+.community_header_title {
+    color: var(--00, #000);
+font-family: "Noto Sans KR";
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.community_header_logo {
+    height: 20px;
+}
+
+.community_header_logo img {
+    height: 20px;
+}
+
+.community_header_notice {
+    width: 25px;
+    height: 26px;
+}
+
+.community_header_notice img {
+    width: 25px;
+    height: 26px;
+}
+
+.community_header_back {
+    width: 25px;
+    height: 25px;
 }
 
 .back {
@@ -241,6 +278,17 @@ h4 {
     margin-top: -2px;
     margin-left: 6px;
     margin-bottom: 70px;
+}
+
+.mycontainer h3{
+        color: var(--ff, #ffffff);
+        font-family: "Noto Sans KR";
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-top: 70px;
+        margin-bottom: 22px;
 }
 
 .allRanks .post-container,
