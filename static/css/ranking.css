@@ -61,8 +61,6 @@ div h2 {
 
 .coupon {
     width: 43.942px;
-    height: 30.422px;
-    transform: rotate(-30deg);
     flex-shrink: 0;
     margin-left: 142px;
     margin-bottom: 21.25px;
@@ -183,6 +181,9 @@ h4 {
     font-style: normal;
     font-weight: 800;
     line-height: 0;
+    margin: 0px;
+    margin-top: 18px;
+    margin-bottom: 22px;
 }
 
 .first .nickimg,
@@ -369,11 +370,16 @@ line-height: normal;
     width: 337px;
 height: 66px;
 flex-shrink: 0;
-border-radius: 15px;
-background: var(--ff, #FFF);
+background-image: url('../img/전체랭킹배경2.png');
+background-size: cover;
 display: flex;
 flex-direction: row;
 }
+
+.myRank.rank-under-3 {
+    background-image: url('../img/전체랭킹배경.png');
+}
+
 
 .myRank .post-image img {
     width: 50px;
@@ -386,9 +392,6 @@ flex-direction: row;
     margin-right: 10px;
 }
 
-.mycontainer{
-
-}
 .thismonth,
 .total {
     display: flex;
@@ -464,6 +467,7 @@ background: url(<path-to-image>) lightgray 50% / cover no-repeat;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
+  margin-bottom: 0px;
   }
 
 
@@ -479,12 +483,39 @@ background: url(<path-to-image>) lightgray 50% / cover no-repeat;
       margin-left: -6px;
   }
  
+
+
+  .myRank .number{
+    color: var(--gray, rgba(29, 29, 29, 0.85));
+    font-family: "Noto Sans KR";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin-left: 26px;
+    margin-right: 18px;
+    margin-top: 17px;
+  }
+
   .myRank .heart {
     display: flex;
     flex-direction: row;
-    margin-top: 35px;
     position: absolute;
-    right: 12px;
-    top: 70%;
-    transform: translateY(-50%);
+    margin-top: 40px;
+    margin-left: 300px;
+  }
+
+  .myRank .heart p{
+    margin: 0px;
+    color: #000;
+font-family: "Noto Sans KR";
+font-size: 10px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin-top: -2px;
+  }
+
+  .myRank .allRankHeart{
+    margin-right: 4px;
   }
