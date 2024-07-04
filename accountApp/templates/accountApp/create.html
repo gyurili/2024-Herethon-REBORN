@@ -58,7 +58,7 @@
           <img
             class="check"
             src="{%static 'img\중복확인.png' %}"
-            alt="Show Password"
+            alt="Check Email"
           />
         </button>
         <div id="email-check-result"></div>
@@ -100,14 +100,9 @@
         <img
           class="basicProfile"
           id="profile-image"
-          src="{% static 'img/profile.png' %}">
-          <!--
-          기본
-          이미지
-          경로
-          설정
-          --
+          src="{% static 'img/profile.png' %}"
         />
+        <!-- 기본 이미지 경로 설정 -->
         <div class="profile">
           <label for="id_image" class="file-label">
             <svg
@@ -124,7 +119,6 @@
               />
             </svg>
             <span>File</span>
-            <-- 선택 버튼에 텍스트 추가 -->
           </label>
           <input
             type="file"
@@ -139,11 +133,11 @@
             <img
               class="check"
               src="{%static 'img\중복확인.png' %}"
-              alt="Show Password"
+              alt="Check Nickname"
             />
           </button>
-          <div id="nickname-check-result"></div>
         </div>
+        <div id="nickname-check-result"></div>
         <style>
           #id_image {
             width: 120px; /* 원하는 가로 길이 설정 */
@@ -175,30 +169,34 @@
                 );
               } else {
                 $("#email-check-result").html(
-                  '<p cstyle="color: green;">사용 가능한 이메일입니다.</p>'
+                  '<p style="color: green;">사용 가능한 이메일입니다.</p>'
                 );
               }
             },
           });
         });
 
-        $('#check-nickname-btn').click(function() {
-                var nickname = $('#id_nickname').val();
-                $.ajax({
-                    url: "{% url 'accountApp:check_nickname' %}",
-                    data: {
-                        'nickname': nickname
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.is_taken) {
-                            $('#nickname-check-result').html('<p style="color: red;">이미 사용중인 닉네임입니다.</p>');
-                        } else {
-                            $('#nickname-check-result').html('<p style="color: green;">사용 가능한 닉네임입니다.</p>');
-                        }
-                    }
-                });
-            });
+        $("#check-nickname-btn").click(function () {
+          var nickname = $("#id_nickname").val();
+          $.ajax({
+            url: "{% url 'accountApp:check_nickname' %}",
+            data: {
+              nickname: nickname,
+            },
+            dataType: "json",
+            success: function (data) {
+              if (data.is_taken) {
+                $("#nickname-check-result").html(
+                  '<p class="nickcheck" style="color: red;">이미 사용중인 닉네임입니다.</p>'
+                );
+              } else {
+                $("#nickname-check-result").html(
+                  '<p class="nickcheck" style="color: green;">사용 가능한 닉네임입니다.</p>'
+                );
+              }
+            },
+          });
+        });
 
         $("#toggle-password1-btn").click(function () {
           var passwordField = $("#id_password1");
@@ -242,8 +240,6 @@
               "{% static 'img/profile.png' %}"; // 선택하지 않았을 때 기본 이미지로 설정
           }
         });
-
-
     </script>
   </body>
 </html>

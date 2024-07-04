@@ -350,9 +350,9 @@ a {
 }
 
 .community_main_sec4_post_toggle {
-    position: absolute;
-    top: 170px;
-    left: 742px;
+    position: relative;
+    top: -410px;
+    left: 270px;
     width: 40px;
     height: 50px;
     background-color: rgba(102, 255, 145, 0.2);
@@ -376,6 +376,10 @@ a {
 .community_main_sec4_post_toggle div:first-child {
     border-bottom: 0.25px solid rgba(0, 0, 0, 0.25);
     ;
+}
+
+.community_toggle_list {
+    cursor: pointer;
 }
 
 /* 메인 - 검색 */
@@ -732,6 +736,7 @@ a {
 
 .my_user {
     padding-left: 15px;
+    padding-top: 15px;
 }
 
 .my_userinfo {
@@ -750,7 +755,7 @@ a {
     color: #66FF91;
     font-size: 12px;
     font-weight: 600;
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .logout-button:focus {
@@ -759,13 +764,18 @@ a {
 
 .my_userBtn {
     cursor: pointer;
-    color: #66FF91;
+    color: #000;
     font-size: 12px;
     font-weight: 600;
-}
-
-.my_userBtn:not(:last-child) {
-    padding-right: 15px;
+    width: 90px;
+    height: 25px;
+    background-color: #66FF91;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 155px;
 }
 
 .my_sec2 {
@@ -837,6 +847,23 @@ a {
 
 .user_post_textImg_img {
     border-radius: 5px;
+}
+
+.user_post_title_area {
+    display: flex;
+}
+
+.user_post_titleLike_category {
+    display: flex;
+    align-items: center;
+    padding-left: 6px;
+}
+
+.user_post_titleLike_category span {
+    font-size: 8px;
+    color: #66FF91;
+    font-weight: 600;
+    padding-left: 4px;
 }
 
 /* 알림 */

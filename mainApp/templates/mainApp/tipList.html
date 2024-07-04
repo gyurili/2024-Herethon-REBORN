@@ -12,9 +12,11 @@
 
 <body>
     <header class="community_header">
-        <a href="{% url 'mainApp:main' %}"><img src="../../../media/backBtn.png" alt="뒤로가기" class="community_header_back"></a>
+        <a href="{% url 'mainApp:main' %}"><img src="../../../media/backBtn.png" alt="뒤로가기"
+                class="community_header_back"></a>
         <span class="community_header_title">커뮤니티</span>
-        <a href="{% url 'mainApp:notice' %}" class="community_header_notice"><img src="../../../media/noticeBell.png" alt="알림"></a>
+        <a href="{% url 'mainApp:notice' %}" class="community_header_notice"><img src="../../../media/noticeBell.png"
+                alt="알림"></a>
     </header>
 
     <main class="community_main">
@@ -77,7 +79,22 @@
                     {% if post.image %}
                     <img width="320" height="240" src="{{ post.image.url }}" class="community_main_sec3_post_img">
                     {% endif %}
-                    <p class="community_main_sec3_post_title"><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
+                    <div style="display: flex;">
+                        <p class="community_main_sec3_post_title"><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
+                        <div class="user_post_titleLike_category">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
+                                <circle cx="1" cy="1" r="1" fill="#66FF91" />
+                                <circle cx="1" cy="1" r="1" fill="black" fill-opacity="0.2" />
+                            </svg>
+                            <span>{% for category in post.category.all %}
+                                {% if category.name == "챌린지" %}
+                                챌린지
+                                {% else %}
+                                공유
+                                {% endif %}
+                                {% endfor %}</span>
+                        </div>
+                    </div>
                     <p class="community_main_sec3_post_text">
                         {% if post.content|length > 40 %}
                         {{ post.content|slice:":40" }}...
