@@ -22,7 +22,14 @@
         {% endif %}<br><br>
         파일 변경 - <input type="file" name="file"><br><br>
 
-        
+        카테고리 변경 - <br>
+        <select name="category" style="font-size: 10px">
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
         <input type="submit" value="수정하기">
     </form>
 </body>

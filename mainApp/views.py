@@ -157,6 +157,8 @@ def detail(request, id):
 @login_required
 def update(request, id):
     post = get_object_or_404(Post, id=id)
+    categories = Category.objects.all()
+
     if request.method == "POST":
         post.title = request.POST.get('title')
         post.content = request.POST.get('content')
@@ -170,9 +172,17 @@ def update(request, id):
             post.file.delete()
             post.file = file
 
+        category_ids = request.POST.getlist('category')
+        post.category.clear()
+        for category_id in category_ids:
+            category = get_object_or_404(Category, id=category_id)
+            post.category.add(category)
+
         post.save()
         return redirect('mainApp:detail', id)
-    return render(request, 'mainApp/update.html', {'post': post})
+    
+    return render(request, 'mainApp/update.html', {'post': post, 'categories': categories})
+
 
 # 글 삭제
 @login_required
