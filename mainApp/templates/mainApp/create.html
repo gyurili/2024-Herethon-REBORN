@@ -12,6 +12,25 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .image-preview {
+        width: 200px;
+        height: 200px;
+        border: 2px solid #dddddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #cccccc;
+      }
+
+      .image-preview__image {
+        display: none;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
 
     <title>글 작성 페이지</title>
   </head>
@@ -69,7 +88,7 @@
       action="{% url 'mainApp:create' %}"
       enctype="multipart/form-data"
     >
-    {% csrf_token %}
+      {% csrf_token %}
       <input
         class="title"
         type="text"
@@ -90,6 +109,11 @@
           name="content"
           placeholder="이번 달의 리폼 챌린지 주제는 ‘바지’ 입니다! 바지를 활용한 다양한 리폼 방법을 소개해볼까요?"
         ></textarea>
+      </div>
+      <!-- 사진 미리보기 -->
+      <div class="image-preview" id="imagePreview">
+        <img src="" alt="Image Preview" class="image-preview__image" />
+        <span class="image-preview__default-text">Image Preview</span>
       </div>
 
       <div class="fileUpload">
@@ -156,7 +180,14 @@
             </svg>
           </div>
         </label>
-        <input type="file" name="image" id="file" />
+        <input
+          type="file"
+          name="image"
+          id="file"
+          class="sr-only"
+          accept="image/png, image/jpeg"
+          onchange="previewImage(event)"
+        />
         <!-- 파일 업로드 -->
         <label for="file">
           <div class="btn-upload">
@@ -224,5 +255,33 @@
       </div>
       <input class="masterUpload" type="submit" value="업로드" />
     </form>
+
+    <script>
+      function previewImage(event) {
+        const file = event.target.files[0];
+        const previewContainer = document.getElementById("imagePreview");
+        const previewImage = previewContainer.querySelector(
+          ".image-preview__image"
+        );
+        const previewDefaultText = previewContainer.querySelector(
+          ".image-preview__default-text"
+        );
+
+        if (file) {
+          const reader = new FileReader();
+          previewDefaultText.style.display = "none";
+          previewImage.style.display = "block";
+
+          reader.onload = function (e) {
+            previewImage.setAttribute("src", e.target.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          previewDefaultText.style.display = null;
+          previewImage.style.display = null;
+          previewImage.setAttribute("src", "");
+        }
+      }
+    </script>
   </body>
 </html>
