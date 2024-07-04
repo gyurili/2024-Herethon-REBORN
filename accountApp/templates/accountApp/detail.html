@@ -21,7 +21,7 @@
     <div>
       <section class="my_sec1">
         <div class="my_userall">
-          <img src="" alt="" />
+          <img src="{{ target_user.image.url }}" alt="프로필 사진" />
           <div class="my_user">
             <div class="my_userinfo">
               <p>{{ target_user.nickname }}</p>
@@ -47,11 +47,11 @@
           <div class="community_main_sec1_item" data-target="my_like_list">좋아요 한 글</div>
         </div>
 
-        <div class="community_main_scroll">
         <div class="my_post_list">
+          <div class="community_my_scroll">
             {% if post_list %}
+            {% for post in post_list %}
             <div class="post_container">
-              {% for post in post_list %}
               <div class="user_post_nameDate">
                 <p>{{ post.author.nickname }}</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
@@ -103,8 +103,8 @@
                 {% endif %}
               </div>
 
-              {% empty %} 작성된 글이 없습니다. {% endfor %}
             </div>
+            {% empty %} 작성된 글이 없습니다. {% endfor %}
             {% else %}
             <div class="post_none">작성한 글이 없습니다.</div>
             {% endif %}
@@ -113,11 +113,11 @@
 
         <!-- 내가 좋아요 누른 글 목록 -->
 
-        <div class="community_main_scroll">
         <div class="my_like_list" style="display: none;">
+          <div class="community_my_scroll">
             {% if liked_post_list %}
+            {% for post in liked_post_list %}
             <div class="post_container">
-              {% for post in liked_post_list %}
               <div class="user_post_nameDate">
                 <p>{{ post.author.nickname }}</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
@@ -127,8 +127,9 @@
               </div>
 
               <div class="user_post_titleLike">
-                <div>
-                  <a href="{% url 'mainApp:detail' post.id %}" class="user_post_titleLike_title"><div class="user_post_titleLike_category">
+                <div class="user_post_title_area">
+                  <a href="{% url 'mainApp:detail' post.id %}" class="user_post_titleLike_title">{{ post.title }}</a>
+                    <div class="user_post_titleLike_category">
                     <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
                       <circle cx="1" cy="1" r="1" fill="#66FF91"/>
                       <circle cx="1" cy="1" r="1" fill="black" fill-opacity="0.2"/>
@@ -167,8 +168,8 @@
                 <img width="110" height="55" src="{{ post.image.url }}" class="user_post_textImg_img" />
                 {% endif %}
               </div>
-              {% empty %} 작성된 글이 없습니다. {% endfor %}
             </div>
+            {% empty %} 작성된 글이 없습니다. {% endfor %}
             {% else %}
             <div class="post_none">좋아요를 누른 글이 없습니다.</div>
             {% endif %}
