@@ -64,10 +64,10 @@ h2 {
 
 select {
   display: flex;
-  width: 55px;
+  width: 80px;
   height: 17px;
   align-items: flex-end;
-  margin-left: 279px;
+  margin-left: 256px;
   margin-top: 13px;
 
   outline: none; /* 선택 시 나타나는 아웃라인 제거 */
@@ -79,6 +79,7 @@ select {
   font-weight: 400;
   line-height: normal;
   cursor: pointer;
+  margin-right: 23px;
 }
 
 option {
@@ -86,8 +87,8 @@ option {
 }
 
 .selectLine {
-  margin-left: 279px;
-  width: 50px;
+  margin-left: 259px;
+  width: 70px;
   height: 0.5px;
   background-color: black;
 }

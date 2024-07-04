@@ -51,6 +51,7 @@ div h2 {
     margin-left: 77px;
 }
 
+
 .crown {
     width: 32px;
     height: 32px;
@@ -112,6 +113,7 @@ h3 {
     font-weight: 700;
     line-height: normal;
     margin-top: 70px;
+    margin-bottom: 15px;
 }
 
 .post-container2 {
@@ -148,6 +150,7 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: -7px;
 }
 
 .secondGraph {
@@ -156,6 +159,7 @@ h3 {
     flex-shrink: 0;
     margin-top: -21px;
     z-index: 0;
+    margin-right: 14px;
 }
 
 .firstGraph {
@@ -164,6 +168,7 @@ h3 {
     flex-shrink: 0;
     margin-top: -20px;
     z-index: 0;
+    margin-right: 14px;
 }
 
 .thirdGraph {
@@ -182,17 +187,27 @@ h4 {
     font-weight: 800;
     line-height: 0;
     margin: 0px;
-    margin-top: 18px;
+    margin-top: 7px;
     margin-bottom: 22px;
+    margin-left: 2px;
 }
 
 .first .nickimg,
-.second .nickimg,
+.second .nickimg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -14px;
+    z-index: 1;
+    
+}
+
 .third .nickimg {
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 1;
+    
 }
 
 .second .nickimg {
@@ -364,6 +379,7 @@ font-size: 22px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: 15px;
 }
 
 .myRank {
@@ -413,7 +429,7 @@ margin-left: 70px;
     justify-content: space-between;
     margin-right: 21px;
     align-items: center;
-    margin-top: -15px;
+    margin-top: -7px;
 }
 
 .thismonth p {
@@ -423,6 +439,8 @@ font-size: 22px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+
+margin: 0px;
 }
 
 .thismonth div {
@@ -541,6 +559,7 @@ margin-top: -2px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    margin: 0px;
     margin-bottom: 100px;
     margin-left: 30px;
   }

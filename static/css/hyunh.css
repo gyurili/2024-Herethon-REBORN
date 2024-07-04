@@ -131,6 +131,7 @@ a {
     justify-content: end;
     padding-right: 30px;
     margin-bottom: 14px;
+
 }
 
 .community_main_sort_selec {
@@ -140,6 +141,8 @@ a {
     width: 20%;
     border-bottom: 1px solid #66FF91;
     cursor: pointer;
+    font-size: 10px;
+    width: 80px;
 }
 
 .community_main_sort_opt {
