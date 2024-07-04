@@ -23,10 +23,12 @@
         <h2>랭킹</h2>
   
         <!-- 알림 버튼 -->
+        <a href="{% url 'mainApp:notice' %}">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26" fill="none">
             <path d="M12.4605 19.2354H19.5542C19.8305 19.2509 20.1061 19.1954 20.3548 19.0741C20.6035 18.9529 20.8169 18.7699 20.9749 18.5427C21.1328 18.3156 21.2299 18.0517 21.2569 17.7764C21.2839 17.501 21.24 17.2233 21.1292 16.9698C20.7542 15.8365 19.2594 14.4771 19.2594 13.1396C19.2594 10.1708 19.2594 9.38959 17.7969 7.64375C17.3231 7.08238 16.7364 6.62702 16.0751 6.3073L15.2594 5.91146C15.1221 5.82941 15.0037 5.71924 14.912 5.58819C14.8202 5.45714 14.7572 5.30816 14.7271 5.15105C14.6456 4.6223 14.366 4.14436 13.9451 3.81416C13.5242 3.48395 12.9934 3.32621 12.4605 3.37292C11.9372 3.34149 11.4209 3.50627 11.0126 3.83507C10.6042 4.16386 10.3331 4.63307 10.2521 5.15105C10.2155 5.31335 10.1436 5.46561 10.0415 5.59703C9.93945 5.72844 9.80972 5.83579 9.66152 5.91146L8.8459 6.3073C8.18489 6.62714 7.59858 7.08249 7.12506 7.64375C5.66361 9.38959 5.66361 10.1708 5.66361 13.1396C5.66361 14.4771 4.23652 15.7 3.86152 16.901C3.63548 17.6271 3.51048 19.2354 5.40319 19.2354H12.4605Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M15.8594 19.2354C15.8686 19.6843 15.787 20.1304 15.6195 20.547C15.4519 20.9635 15.2019 21.3419 14.8844 21.6594C14.5669 21.9769 14.1886 22.2269 13.772 22.3944C13.3555 22.562 12.9093 22.6436 12.4605 22.6344C12.0115 22.6439 11.5653 22.5625 11.1487 22.395C10.7321 22.2276 10.3536 21.9775 10.0362 21.66C9.71874 21.3424 9.46882 20.9639 9.30149 20.5472C9.13416 20.1306 9.05288 19.6843 9.06254 19.2354" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
+        </a>
     </header>
 
     <div class="bottom">
@@ -165,16 +167,27 @@
             <h3>내 랭킹은 몇 위? </h3>
             <div class="myRank">
             {% if user_post %}
-                <p>rank: {{ user_post_rank }}</p>
+                <p class="number">{{ user_post_rank }}</p>
                 {% if user_post.image %}
                     <div class="post-image">
-                        <img width="80" height="60" src="{{ post.image.url }}" alt="프로필사진">
+                        <img src="{{ post.image.url }}" alt="프로필사진">
                     </div>
                 {% endif %}
+                <div class="post-details">
+                <div class="post-details-details">
                 <h4> {{ user_post.author.nickname }} </h4>
                 <p><a href="{% url 'mainApp:detail' user_post.id %}">{{ user_post.title }}</a>
-                <p> like count: {{ user_post.like.count }} </p>
-                <p> comment count: {{ user_post.comment.count }} </p>
+                </div>
+                </div>
+                <div class="heart">
+                    <img
+                        class="allRankHeart"
+                        src="{%static 'img\좋아요.png' %}"
+                        alt="좋아요"
+                      /> 
+                      <p>{{ user_post.like.count }} </p>
+                    </div> 
+                
             {% endif %}
         </div>
         </div>
@@ -199,9 +212,9 @@
     
             extraRankings.forEach(item => {
                 if (item.style.display === 'none' || item.style.display === '') {
-                    item.style.display = 'block';
+                    item.style.display = 'flex';
                 } else {
-                    item.style.display = 'none';
+                    item.style.display = 'none'; // 변경: 닫히는 기능 추가
                 }
             });
     
@@ -221,6 +234,7 @@
             extraRankings.forEach(item => item.style.display = 'none');
         });
     </script>
+    
     
     
     
