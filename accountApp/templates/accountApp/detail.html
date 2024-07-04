@@ -34,7 +34,7 @@
               {% endif %}
           </div>
         </div>
-        <form action="{% url 'accountApp:logout' %}?next={{ request.path }}" method="post" class="pragmatic_header_nav">
+        <form action="{% url 'accountApp:logout' %}?next={% url 'mainApp:main' %}" method="post" class="pragmatic_header_nav">
           {% csrf_token %}
           <button type="submit" class="logout-button">로그아웃</button>
         </form>
