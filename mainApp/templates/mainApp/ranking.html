@@ -203,6 +203,37 @@
         </div>
     </div>
 
+    <footer class="community_footer">
+        <div class="community_footer_home">
+          <a href="{% url 'mainApp:main' %}">
+            <img src="../../../media/Home.png" alt="홈" width="20px" height="20px">
+          </a>
+          <p>홈</p>
+        </div>
+        <div class="community_footer_rank">
+          <a href="{% url 'mainApp:ranking' %}">
+            <img src="../../../media/Rank.png" alt="랭킹" width="20px" height="20px">
+          </a>
+          <p>랭킹</p>
+        </div>
+        <div class="community_footer_community">
+          <a href="{% url 'mainApp:tipList' %}">
+            <img src="../../../media/Community.png" alt="커뮤니티" width="20px" height="20px">
+          </a>
+          <p>커뮤니티</p>
+        </div>
+        <div class="community_footer_my">
+          {% if not user.is_authenticated %}
+          <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+          {% else %}
+          <a href="{% url 'accountApp:detail' pk=user.pk %}">
+            <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+          </a>
+          {% endif %}
+          <p>MY</p>
+        </div>
+      </footer>
+
     <script>
         function toggleRankings() {
             const extraRankings = document.querySelectorAll('.post-container.extra');

@@ -563,3 +563,28 @@ margin-top: -2px;
     margin-bottom: 100px;
     margin-left: 30px;
   }
+
+  .community_footer {
+    position: fixed;
+    bottom: 0;
+    background-color: rgb(0, 0, 0, 0.8);
+    width: 375px;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.community_footer_home,
+.community_footer_rank,
+.community_footer_community,
+.community_footer_my {
+    display: grid;
+    justify-items: center;
+    color: #66FF91;
+    font-size: 12px;
+}
+
+.community_footer p{
+        margin: 0px;
+    }
