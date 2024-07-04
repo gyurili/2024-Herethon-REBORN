@@ -437,7 +437,6 @@ line-height: normal;
 .total {
     display: flex;
     flex-direction: row;
-    margin-bottom: 50px;
 }
 
 .total p {
@@ -533,4 +532,15 @@ margin-top: -2px;
 
   .myRank .allRankHeart{
     margin-right: 4px;
+  }
+
+  .last {
+    color: var(--test_gr, #66FF91);
+    font-family: "Noto Sans KR";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 100px;
+    margin-left: 30px;
   }
