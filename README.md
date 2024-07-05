@@ -73,6 +73,7 @@
 ## 개발환경에서의 실행 방법
 
   ```
+  $ cd 2024-Herethon-1
   $ python -m venv myvenv
   $ source myvenv/Scripts/activate
   $ pip install -r requirements.txt
