@@ -4,6 +4,23 @@ import os
 from uuid import uuid4
 from django.utils import timezone
 
+class Notification(models.Model):
+    NOTIFICATION_TYPES = (
+        ('like', 'Like'),
+        ('comment', 'Comment'),
+        ('rank', 'Rank'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    notification_type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES)
+    message = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey('Post', null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user} - {self.notification_type}'
+    
 def upload_filepath(instance, filename):
     today_str = timezone.now().strftime("%Y%m%d")
     file_basename = os.path.basename(filename)

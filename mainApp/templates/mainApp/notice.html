@@ -21,78 +21,24 @@
 
     <main class="community_main">
         <div class="community_main_scroll">
+            {% for notification in notifications %}
             <div class="notice_container">
                 <div class="notice_item">
-                    <img src="../../../media/read_noticeLike.png" alt="알림">
-                    <div class="notice_text">
-                        <p class="notice_title">좋아요</p>
-                        <p class="notice_content">콩콩 님이 내 글에 좋아요를 눌렀습니다.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="notice_container">
-                <div class="notice_item">
+                    {% if notification.notification_type == 'like' %}
                     <img src="../../../media/noticeLike.png" alt="알림">
-                    <div class="notice_text">
-                        <p class="notice_title">좋아요</p>
-                        <p class="notice_content">킹콩 님이 내 글에 좋아요를 눌렀습니다.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="notice_container">
-                <div class="notice_item">
+                    {% elif notification.notification_type == 'comment' %}
                     <img src="../../../media/noticeComment.png" alt="알림">
-                    <div class="notice_text">
-                        <p class="notice_title">댓글</p>
-                        <p class="notice_content">모짜 님이 내 글에 댓글을 달았습니다: 너무 센스있는 리폼이 ...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="notice_container">
-                <div class="notice_item">
+                    {% else %}
                     <img src="../../../media/noticeRank.png" alt="알림">
+                    {% endif %}
                     <div class="notice_text">
-                        <p class="notice_title">랭킹</p>
-                        <p class="notice_content">챌린지 랭킹 내 순위가 올랐습니다! (4위 > 2위)</p>
+                        <a href="{% url 'mainApp:detail' notification.post.id %}">
+                        <p class="notice_title">{{ notification.get_notification_type_display }}</p>
+                        <p class="notice_content">{{ notification.message }}</p></a>
                     </div>
                 </div>
             </div>
-            <div class="notice_container">
-                <div class="notice_item">
-                    <img src="../../../media/read_noticeLike.png" alt="알림">
-                    <div class="notice_text">
-                        <p class="notice_title">좋아요</p>
-                        <p class="notice_content">망각 님이 내 글에 좋아요를 눌렀습니다.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="notice_container">
-                <div class="notice_item">
-                    <img src="../../../media/read_noticeComment.png" alt="알림">
-                    <div class="notice_text">
-                        <p class="notice_title">댓글</p>
-                        <p class="notice_content">애플 님이 내 글에 댓글을 달았습니다: 안녕하세요! 사용하신 ...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="notice_container">
-                <div class="notice_item">
-                    <img src="../../../media/read_noticeLike.png" alt="알림">
-                    <div class="notice_text">
-                        <p class="notice_title">좋아요</p>
-                        <p class="notice_content">라일락 님이 내 글에 좋아요를 눌렀습니다.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="notice_container">
-                <div class="notice_item">
-                    <img src="../../../media/read_noticeLike.png" alt="알림">
-                    <div class="notice_text">
-                        <p class="notice_title">좋아요</p>
-                        <p class="notice_content">굼뇽군 님이 내 글에 좋아요를 눌렀습니다.</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </main>
 

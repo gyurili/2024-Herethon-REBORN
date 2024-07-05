@@ -1,5 +1,5 @@
 from datetime import date, timedelta
-
+from .utils import *
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -214,11 +214,12 @@ def view_comment(request, post_id):
 def create_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == "POST":
-        Comment.objects.create(
+        comment = Comment.objects.create(
             content=request.POST.get('content'),
             author=request.user,
             post=post
         )
+        create_notification(post.author, 'comment', f'{request.user.nickname} 님이 내 글에 댓글을 달았습니다: {comment.content}', post)
         return redirect('mainApp:view_comment', post_id)
 
 # 댓글 삭제
@@ -234,6 +235,7 @@ def delete_comment(request, comment_id):
 def add_like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.like.add(request.user)
+    create_notification(post.author, 'like', f'{request.user.nickname} 님이 내 글에 좋아요를 눌렀습니다.', post)
     return redirect('mainApp:detail', post_id)
 
 # 하트 취소
@@ -244,5 +246,7 @@ def remove_like(request, post_id):
     return redirect('mainApp:detail', post_id)
 
 # 알림
+@login_required
 def notice(request):
-    return render(request, "mainApp/notice.html")
+    notifications = request.user.notifications.all().order_by('-created_at')
+    return render(request, "mainApp/notice.html", {'notifications': notifications})
