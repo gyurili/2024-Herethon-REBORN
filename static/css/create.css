@@ -167,5 +167,11 @@ label {
   display: none;
 }
 
+form .image-preview {
+  border: none;
+  max-width: auto;
+  height: auto;
+}
+
 
 

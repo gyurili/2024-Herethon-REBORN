@@ -131,7 +131,13 @@
                         <div class="post-details">
                             <div class="post-details-details">
                             <h4> {{ post.author.nickname }} </h4>
-                            <p><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
+                            <p><a href="{% url 'mainApp:detail' post.id %}">
+                                {% if post.title|length > 16 %}
+                                {{ post.title|slice:":16" }}...
+                                {% else %}
+                                {{ post.title }}
+                                {% endif %}
+                            </a></p>
                         </div>
                         <div class="heart">
                             <img
