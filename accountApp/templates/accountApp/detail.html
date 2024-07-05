@@ -130,7 +130,11 @@
 
               <div class="user_post_titleLike">
                 <div class="user_post_title_area">
-                  <a href="{% url 'mainApp:detail' post.id %}" class="user_post_titleLike_title">{{ post.title }}</a>
+                  <a href="{% url 'mainApp:detail' post.id %}" class="user_post_titleLike_title">{% if post.title|length > 16 %}
+                    {{ post.title|slice:":16" }}...
+                    {% else %}
+                    {{ post.title }}
+                    {% endif %}</a>
                     <div class="user_post_titleLike_category">
                     <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
                       <circle cx="1" cy="1" r="1" fill="#66FF91"/>
