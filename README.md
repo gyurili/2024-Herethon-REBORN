@@ -73,6 +73,7 @@
 ## 개발환경에서의 실행 방법
 
   ```
+  $ git clone https://github.com/2024-HERETHON/2024-Herethon-1.git
   $ cd 2024-Herethon-1
   $ python -m venv myvenv
   $ source myvenv/Scripts/activate
