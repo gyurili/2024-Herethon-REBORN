@@ -411,7 +411,8 @@ h4 {
     border: none;
     cursor: pointer;
     padding: 0;
-    margin-left: 156px;
+    position: relative;
+    left: 42%;
     margin-top: 18.5px;
 }
 
