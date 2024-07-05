@@ -294,6 +294,7 @@ a {
     justify-items: center;
     color: #66FF91;
     font-size: 12px;
+    font-weight: 400;
 }
 
 /* 커뮤니티 - 상세 페이지 */
@@ -463,6 +464,11 @@ a {
 .swiper-content-text {
     font-size: 12px;
     width: 210px;
+    font-weight: 500;
+}
+
+.swiper_last_text {
+    width: 200px;
 }
 
 .swiper-content-btn {
@@ -475,6 +481,7 @@ a {
     align-items: center;
     border: none;
     font-size: 12px;
+    font-weight: bold;
 }
 
 .swiper-container {
@@ -493,6 +500,7 @@ a {
 .mainpg_main_today {
     /* height: 230px; */
     padding: 30px 20px 20px 20px;
+    font-family: "Noto Sans KR";
 }
 
 .mainpg_main_today_title {
@@ -537,6 +545,10 @@ a {
     margin-top: 20px;
 }
 
+.last_img {
+    margin-right: 15px;
+}
+
 /* 메인 - 인기글 */
 
 .mainpg_main_today_post {
@@ -572,7 +584,7 @@ a {
     background: url('../../media/rank_num.png') no-repeat;
     background-size: 35px;
     background-position: center;
-    font-weight: bold;
+    font-weight: 900;
     font-size: 20px;
 }
 
