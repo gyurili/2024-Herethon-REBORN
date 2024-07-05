@@ -1,11 +1,12 @@
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
 from django.http import JsonResponse
 # from django.contrib.auth.models import User
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
@@ -85,9 +86,19 @@ class AccountUpdateView(UpdateView):
     model = User
     context_object_name = 'target_user'
     template_name = 'accountApp/update.html'
-    success_url = reverse_lazy('mainApp:main')
     form_class = AccountCreationForm
 
+    def form_valid(self, form):
+        # Save the form and update the user's information
+        response = super().form_valid(form)
+
+        # Update the session with the new user data to keep the user logged in
+        update_session_auth_hash(self.request, self.object)
+
+        return response
+
+    def get_success_url(self):
+        return reverse('accountApp:detail', kwargs={'pk': self.object.pk})
 
 @method_decorator(has_ownership, 'get')
 @method_decorator(has_ownership, 'post')
