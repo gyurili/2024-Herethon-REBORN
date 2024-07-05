@@ -141,8 +141,8 @@ a {
     width: 20%;
     border-bottom: 1px solid #66FF91;
     cursor: pointer;
-    font-size: 10px;
-    width: 80px;
+    font-size: 12px;
+    width: 90px;
 }
 
 .community_main_sort_opt {
@@ -260,6 +260,7 @@ a {
     font-size: 14px;
     font-weight: bold;
     margin: 10px 0;
+    width: 320px;
 }
 
 .community_main_sec2_post_title a,
@@ -272,6 +273,7 @@ a {
 .community_main_sec3_post_text {
     font-size: 10px;
     color: rgb(0, 0, 0, 0.5);
+    width: 320px;
 }
 
 /* 커뮤니티 - 푸터 */

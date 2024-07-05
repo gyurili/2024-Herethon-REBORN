@@ -97,8 +97,8 @@
                         <p class="community_main_sec2_post_title"><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
                     </div>
                     <p class="community_main_sec2_post_text">
-                        {% if post.content|length > 40 %}
-                        {{ post.content|slice:":40" }}...
+                        {% if post.content|length > 85 %}
+                        {{ post.content|slice:":85" }}...
                         {% else %}
                         {{ post.content }}
                         {% endif %}
