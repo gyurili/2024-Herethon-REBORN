@@ -253,6 +253,7 @@ a {
     margin-top: 10px;
     border-radius: 5px;
     height: 140px;
+    object-fit: cover;
 }
 
 .community_main_sec2_post_title,
