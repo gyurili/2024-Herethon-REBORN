@@ -16,7 +16,8 @@
     <header class="community_header">
         <div class="community_header_left"></div>
         <a class="community_header_logo"><img src="../../../media/REBORN.png" alt="REBORN"></a>
-        <a href="{% url 'mainApp:notice' %}" class="community_header_notice"><img src="../../../media/noticeBell.png" alt="알림"></a>
+        <a href="{% url 'mainApp:notice' %}" class="community_header_notice"><img src="../../../media/noticeBell.png"
+                alt="알림"></a>
     </header>
 
     <main class="community_main">
@@ -65,8 +66,10 @@
                 <div class="mainpg_main_today_title">오늘의 인기 보드</div>
                 <div class="mainpg_main_today_content">
                     <div class="mainpg_main_today_item">
-                        <p>오늘 내 챌린지 랭킹은?</p>
-                        <img src="../../../media/today1.png" alt="랭킹">
+                        <a href="{% url 'mainApp:ranking' %}">
+                            <p>오늘 내 챌린지 랭킹은?</p>
+                            <img src="../../../media/today1.png" alt="랭킹">
+                        </a>
                     </div>
                     <div class="mainpg_main_today_item">
                         <a href="{% url 'mainApp:challengeList' %}">
