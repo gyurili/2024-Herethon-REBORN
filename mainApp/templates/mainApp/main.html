@@ -93,9 +93,9 @@
                                 <span class="rank">{{ forloop.counter }}</span>
                             </div>
                             <div class="post-container">
-                                {% if post.image %}
+                                {% if post.author.image %}
                                 <div class="post-image">
-                                    <img width="80" height="60" src="{{ post.image.url }}">
+                                    <img width="40" height="40" src="{{ post.author.image.url }}">
                                 </div>
                                 {% endif %}
                                 <div class="post-details">

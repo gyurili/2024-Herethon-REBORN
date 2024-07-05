@@ -65,6 +65,19 @@
                             </div>
                         </div>
                         <div class="community_main_sec3_post_likeCom">
+                            <div class="user_post_titleLike_category">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
+                                    <circle cx="1" cy="1" r="1" fill="#66FF91" />
+                                    <circle cx="1" cy="1" r="1" fill="black" fill-opacity="0.2" />
+                                </svg>
+                                <span>{% for category in post.category.all %}
+                                    {% if category.name == "챌린지" %}
+                                    챌린지
+                                    {% else %}
+                                    공유
+                                    {% endif %}
+                                    {% endfor %}</span>
+                            </div>
                             <p>
                                 {% if request.user in post.like.all %}
                                 <a href="{% url 'mainApp:remove_like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
@@ -82,19 +95,6 @@
                     {% endif %}
                     <div style="display: flex;">
                         <p class="community_main_sec3_post_title"><a href="{% url 'mainApp:detail' post.id %}">{{ post.title }}</a></p>
-                        <div class="user_post_titleLike_category">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
-                                <circle cx="1" cy="1" r="1" fill="#66FF91" />
-                                <circle cx="1" cy="1" r="1" fill="black" fill-opacity="0.2" />
-                            </svg>
-                            <span>{% for category in post.category.all %}
-                                {% if category.name == "챌린지" %}
-                                챌린지
-                                {% else %}
-                                공유
-                                {% endif %}
-                                {% endfor %}</span>
-                        </div>
                     </div>
                     <p class="community_main_sec3_post_text">
                         {% if post.content|length > 40 %}
@@ -132,7 +132,9 @@
         </div>
         <div class="community_footer_my">
             {% if not user.is_authenticated %}
-            <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            <a href="{% url 'accountApp:login' %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
             {% else %}
             <a href="{% url 'accountApp:detail' pk=user.pk %}">
                 <img src="../../../media/My.png" alt="마이" width="20px" height="20px">

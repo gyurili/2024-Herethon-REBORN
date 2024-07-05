@@ -50,7 +50,7 @@
         </section>
 
         <div class="community_main_scroll margin">
-            <section class="community_main_sec2">
+            <section class="community_main_sec4">
                 <div class="community_main_sec2_post">
                     <div class="community_main_sec3_post_header">
                         <div class="community_main_sec3_post_user">
@@ -96,13 +96,13 @@
     <div class="community_main_sec4_post_likeCom">
         <p>
             {% if request.user in post.like.all %}
-            <a href="{% url 'mainApp:remove_like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
+            <a class="sec4_like" href="{% url 'mainApp:remove_like' post.id %}"><i class="fas fa-heart fa-lg"></i></a>
             {% else %}
-            <a href="{% url 'mainApp:add_like' post.id %}"><i class="fa-regular fa-heart fa-lg"></i></a>
+            <a class="sec4_like" href="{% url 'mainApp:add_like' post.id %}"><i class="fa-regular fa-heart fa-lg"></i></a>
             {% endif %}
             {{ post.like.count }}
         </p>
-        <p><a href="{% url 'mainApp:view_comment' post.id %}"><img src="../../../media/comment.png" alt="댓글"></a>{{ post.comments.count }}</p>
+        <p><a class="sec4_comment" href="{% url 'mainApp:view_comment' post.id %}"><img src="../../../media/comment.png" alt="댓글"></a>{{ post.comments.count }}</p>
     </div>
 
     <footer class="community_footer">
@@ -126,7 +126,9 @@
         </div>
         <div class="community_footer_my">
             {% if not user.is_authenticated %}
-            <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            <a href="{% url 'accountApp:login' %}">
+                <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
+            </a>
             {% else %}
             <a href="{% url 'accountApp:detail' pk=user.pk %}">
                 <img src="../../../media/My.png" alt="마이" width="20px" height="20px">
