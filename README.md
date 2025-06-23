@@ -1,83 +1,100 @@
-2024 여기톤 : HERETHON 1조
-</br></br>
+# ♻️ REBORN - 나만의 리폼 커뮤니티 서비스
+
+![Untitled](https://github.com/user-attachments/assets/f66b0a5e-c3df-411c-b963-1fb2a229293e)
 
 
-## 서비스 소개
+> 다시 태어나는 나만의 스타일, **REBORN**
 
-💡 **키워드: MZ, 여성**
+**리폼**과 **리사이클링**을 통해 나만의 창의적인 스타일을 만들고,  
+이를 사람들과 공유하며 함께 성장하는 MZ 위한 **참여형 커뮤니티 서비**입니다.
 
-  REBORN은 사람들과 함께 리사이클링으로 헌 옷의 새로운 가치를 창출해 냅니다. 나만의 리폼과 리사이클링 방법을 커뮤니티에 공유하고, 월간 선정 주제를 활용한 리사이클링 챌린지에도 참여할 수 있습니다. 챌린지에 참여한 사람들과 경쟁하며 자신의 랭킹을 확인하고, 1위를 차지해 제휴 업체 상품 혜택을 누려 보세요. 메인 페이지에서 매달 달라지는 챌린지 제휴 업체 소개와 다양한 리사이클링에 관한 정보를 접할 수 있습니다. #리폼숏폼에서 나만의 리폼 방법을 짧은 영상 콘텐츠로도 공유해보세요. REBORN과 함께 다시 태어나는 나만의 스타일을 자랑해 주세요!
-</br></br>
 
-## 기술 스택
-  <span>프론트엔드: </span> <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<br>
 
-  <span>백엔드: </span><img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=Django&logoColor=white">
 
-  <span>기획·디자인: </span> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
-</br></br>
+## 📅 프로젝트 개요
 
-## 팀원 소개
+- **진행 기간**: 2024년 6월 22일 ~ 2024년 7월 6일
+- **참여 인원**: 총 5명 (기 1명, 프론트 2명, 백 2명)
 
-| 역할 | 이름 | 소속 |
-| --- | --- | --- |
-| 기획·디자인 | 윤수진 | 동덕여자대학교 커뮤니케이션콘텐츠전공 |
-| 프론트엔드 | 김채연 | 이화여자대학교 사이버보안학과 |
-| 프론트엔드 | 노현희 | 성신여자대학교 수학과 |
-| 백엔드 | 박규리 | 덕성여자대학교 컴퓨터공학과 |
-| 백엔드 | 서영은 | 서울여자대학교 소프트웨어융합학과 |
+<br>
 
-</br>
+## 🔎 소개
 
-## 폴더 구조
+REBORN은 리사이클링으로 헌 옷의 새로운 가치를 창출해내는 서비스입니다.
 
-  ```
-  📂 2024-Herethon-1
-   ├─ herethon2024
-   │  ├─ __init__.py
-   │  ├─ asgi.py
-   │  ├─ settings.py
-   │  ├─ urls.py
-   │  └─ wsgi.py
-   ├─ accountApp
-   │  ├─ __init__.py
-   │  ├─ admin.py
-   │  ├─ apps.py
-   │  ├─ decorators.py
-   │  ├─ forms.py
-   │  ├─ models.py
-   │  ├─ tests.py
-   │  ├─ urls.py
-   │  └─ views.py
-   ├─ mainApp
-   │  ├─ __init__.py
-   │  ├─ admin.py
-   │  ├─ apps.py
-   │  ├─ models.py
-   │  ├─ tests.py
-   │  ├─ urls.py
-   │  └─ views.py
-   ├─ static
-   │  ├─ css
-   │  └─  img
-   ├─ .env
-   ├─ .gitignore
-   ├─ db.sqlite3
-   ├─ README.md
-   ├─ requirements.txt
-   └─ manage.py
-  ```
+- ✂️ 직접 만든 리폼 결과물을 **짧은 콘텐츠(#리폼숏폼)** 형태로 공유
+- 🏆 매달 주제에 맞춘 **리사이클링 챌린지** 참여 및 랭킹 경쟁
+- 🎁 상위 랭커에게는 **제휴 업체 쿠폰 등 리워드 제공**
+- 🧵 다양한 **리사이클링 정보 및 팁**을 메인 페이지에서 제공
+- 👥 다른 유저와 소통하는 **커뮤니티 기능** 제공
 
-</br>
+> 함께 만들고, 함께 칭찬받고, 함께 성장하는 커뮤니티  
+> **REBORN과 함께 다시 태어나는 나만의 스타일을 자랑해보세요!**
 
-## 개발환경에서의 실행 방법
 
-  ```
-  $ git clone https://github.com/2024-HERETHON/2024-Herethon-1.git
-  $ cd 2024-Herethon-1
-  $ python -m venv myvenv
-  $ source myvenv/Scripts/activate
-  $ pip install -r requirements.txt
-  $ python manage.py runserver
-  ```
-  <hr/>
+<br>
+
+## 🧭 주요 기능
+
+### 👤 회원가입 / 로그인
+- 아이디 & 비밀번호 기반 계정 생성
+- 로그인 후 커뮤니티, 챌린지, 마이페이지 이용 가능
+
+### 🧵 커뮤니티
+- 챌린지 게시판: 월간 주제에 맞춘 리폼 결과물 업로드
+- 정보 공유 게시판: 리사이클링 노하우, 리폼 방법 공유
+- 댓글, 좋아요, 파일 첨부 기능 포함
+
+### 🏆 랭킹
+- 글의 좋아요(하트) 수 기반 랭킹 시스템
+- 챌린지 참여 횟수 및 누적 랭킹 확인 가능
+- 상위 유저에게 제휴사 리워드 지급
+
+### 🔔 알림
+- 좋아요, 댓글, 랭킹 관련 알림 실시간 전송
+
+### 👤 마이페이지
+- 내가 쓴 글 / 좋아요한 글 분류 확인
+- 비밀번호 / 프로필 수정 가능
+  
+
+
+<br>
+
+## 🛠️ 기술 스택
+
+| 분야 | 사용 기술 |
+|------|------------|
+| PM | Figma |
+| Frontend | HTML, CSS, JavaScript |
+| Backend | Django (Python) |
+| DB | SQLite |
+
+<br>
+
+## 🗂 프로젝트 구조
+
+```
+📁 2024-Herethon-1/
+├── accountApp/        # 사용자 인증 관련 앱
+├── herethon2024/          # Django 메인 설정
+├── mainApp/          # 핵심 기능 앱
+├── static/          # 정적 파일 (CSS, JS 등)
+```
+
+<br>
+
+## ⚙️ 실행 방법
+```bash
+# 1. GitHub 저장소 클론
+git clone https://github.com/2024-HERETHON/2024-Herethon-1.git
+cd 2024-Herethon-1
+
+# 2. 가상환경 설정
+python -m venv myvenv
+source myvenv/Scripts/activate
+
+# 3. 패키지 설치
+pip install -r requirements.txt
+```
